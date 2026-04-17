@@ -1,0 +1,21 @@
+<!-- ROLE: Card composition patterns. Demonstrates: plain card, card--secondary nested, card with title+description+footer, dashboard row layout. Use as the canonical container pattern. -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zi UI v3 — Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<link rel="stylesheet" href="../ref/tokens.css" />
+<link rel="stylesheet" href="../ref/page.css" />
+<link rel="stylesheet" href="../ref/components.css" />
+<script src="../ref/shell.js"></script>
+</head>
+<body>
+<script>renderLayout({"key":"card","title":"Card","depth":1,"section":"Component","label":"Component · 12","desc":"Three surfaces — default, secondary, tertiary. All share the 24px radius and surface shadow.","content":"\n    <div class=\"demo-grid three\">\n      <div class=\"card\">\n        <div style=\"display:flex;align-items:center;gap:10px\">\n          <div class=\"avatar gradient-1\">PS</div>\n          <div style=\"display:flex;flex-direction:column\">\n            <div class=\"card__title\">Pulse Studio</div>\n            <div class=\"card__description\">Design team · 14 members</div>\n          </div>\n        </div>\n        <div style=\"height:96px;border-radius:16px;background:linear-gradient(135deg,oklch(0.92 0.06 253),oklch(0.88 0.08 325))\"></div>\n        <div class=\"card__footer\" style=\"justify-content:space-between\">\n          <span class=\"chip chip--soft chip--success\"><span class=\"dot\"></span>Live</span>\n          <button class=\"button button--ghost button--sm\">Open <i class=\"ph-duotone ph-arrow-right\"></i></button>\n        </div>\n      </div>\n      <div class=\"card card--secondary\">\n        <div class=\"card__title\">Usage this month</div>\n        <div style=\"display:flex;align-items:baseline;gap:8px\">\n          <div style=\"font-size:36px;font-weight: 500;letter-spacing:-0.02em\">284,921</div>\n          <div class=\"chip chip--soft chip--success chip--sm\">+12.4%</div>\n        </div>\n        <p class=\"card__description\">API requests vs. <span class=\"mono\">232,118</span> last month.</p>\n        <div class=\"progress\"><div style=\"width:62%\"></div></div>\n        <div style=\"font-size:12px;color:var(--muted)\">62% of 500K included requests</div>\n      </div>\n      <div class=\"card card--tertiary\">\n        <div style=\"display:flex;justify-content:space-between;align-items:start\">\n          <div class=\"card__title\">Invite teammates</div>\n          <span class=\"badge badge--soft badge--accent badge--sm\">Unlimited</span>\n        </div>\n        <p class=\"card__description\">Send an invite link. Everyone at <span class=\"mono\">@acme.com</span> joins automatically.</p>\n        <div class=\"input-group\"><i class=\"ph-duotone ph-link\"></i><input value=\"zi.ui/invite/ac-72b\" /></div>\n        <div class=\"card__footer\">\n          <button class=\"button button--primary button--sm\">Copy link</button>\n          <button class=\"button button--ghost button--sm\">Manage</button>\n        </div>\n      </div>\n    </div>\n  ","prev":{"href":"components/tooltip.html","title":"Tooltip"},"next":{"href":"components/tabs.html","title":"Tabs"}});</script>
+
+</body>
+</html>

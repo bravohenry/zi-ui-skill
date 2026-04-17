@@ -1,0 +1,21 @@
+<!-- ROLE: Data table inside a card. Demonstrates: flush header band, separator-delimited rows, chip in status column, avatar in project column. Use as canonical list-page layout. -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zi UI v3 — Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<link rel="stylesheet" href="../ref/tokens.css" />
+<link rel="stylesheet" href="../ref/page.css" />
+<link rel="stylesheet" href="../ref/components.css" />
+<script src="../ref/shell.js"></script>
+</head>
+<body>
+<script>renderLayout({"key":"table","title":"Table","depth":1,"section":"Component","label":"Component · 17","desc":"Flush header band, separator-delimited rows, tokenized hover.","content":"\n    <div class=\"card\" style=\"padding:0;overflow:hidden\">\n      <table class=\"tbl\">\n        <thead><tr><th>Project</th><th>Status</th><th>Owner</th><th>Uptime</th><th style=\"text-align:right\">Requests</th></tr></thead>\n        <tbody>\n          <tr><td><div style=\"display:flex;align-items:center;gap:10px\"><div class=\"avatar avatar--sm gradient-1\">PS</div><div><div style=\"font-weight:500\">Pulse Studio</div><div style=\"color:var(--muted);font-size:12px\">pulse.zi.ui</div></div></div></td><td><span class=\"chip chip--soft chip--success\"><span class=\"dot\"></span>Live</span></td><td>Ana Kowalski</td><td class=\"mono\">99.98%</td><td class=\"mono\" style=\"text-align:right\">284,921</td></tr>\n          <tr><td><div style=\"display:flex;align-items:center;gap:10px\"><div class=\"avatar avatar--sm gradient-2\">OB</div><div><div style=\"font-weight:500\">Onboard API</div><div style=\"color:var(--muted);font-size:12px\">onboard.zi.ui</div></div></div></td><td><span class=\"chip chip--soft chip--warning\"><span class=\"dot\"></span>Degraded</span></td><td>Jamal Singh</td><td class=\"mono\">98.12%</td><td class=\"mono\" style=\"text-align:right\">72,418</td></tr>\n          <tr><td><div style=\"display:flex;align-items:center;gap:10px\"><div class=\"avatar avatar--sm gradient-3\">HU</div><div><div style=\"font-weight:500\">Hub admin</div><div style=\"color:var(--muted);font-size:12px\">hub.zi.ui</div></div></div></td><td><span class=\"chip chip--soft chip--danger\"><span class=\"dot\"></span>Offline</span></td><td>Mira Reyes</td><td class=\"mono\">91.04%</td><td class=\"mono\" style=\"text-align:right\">3,102</td></tr>\n          <tr><td><div style=\"display:flex;align-items:center;gap:10px\"><div class=\"avatar avatar--sm\">DX</div><div><div style=\"font-weight:500\">Docs</div><div style=\"color:var(--muted);font-size:12px\">docs.zi.ui</div></div></div></td><td><span class=\"chip chip--soft chip--accent\"><span class=\"dot\"></span>Staging</span></td><td>Priya Patel</td><td class=\"mono\">100.00%</td><td class=\"mono\" style=\"text-align:right\">16,055</td></tr>\n        </tbody>\n      </table>\n    </div>\n  ","prev":{"href":"components/avatar.html","title":"Avatar"},"next":{"href":"components/modal.html","title":"Modal"}});</script>
+
+</body>
+</html>

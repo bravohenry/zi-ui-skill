@@ -1,0 +1,21 @@
+<!-- ROLE: Form field patterns. Demonstrates: label+input+helper stack, invalid state, input-group with icon, textarea. Use as truth for form spacing (6px gap label→input, helper below). -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zi UI v3 — Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<link rel="stylesheet" href="../ref/tokens.css" />
+<link rel="stylesheet" href="../ref/page.css" />
+<link rel="stylesheet" href="../ref/components.css" />
+<script src="../ref/shell.js"></script>
+</head>
+<body>
+<script>renderLayout({"key":"input","title":"Input","depth":1,"section":"Component","label":"Component · 02","desc":"Fields use <span class=\"mono\">--radius-field</span> (12px), a transparent border by default, and a high-contrast focus ring built from the accent token.","content":"\n    <div class=\"demo-grid\">\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-text-t\"></i>Primary</span><span class=\"tags\"><span>default</span><span>focus</span></span></div>\n        <div class=\"body stack\">\n          <div class=\"field-group\"><label class=\"label\">Email</label><input class=\"input\" placeholder=\"you@zi.ui\"><span class=\"label-helper\">We'll never share your email.</span></div>\n          <div class=\"field-group\"><label class=\"label\">Password</label><input class=\"input\" type=\"password\" value=\"••••••••\"></div>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-warning\"></i>States</span><span class=\"tags\"><span>secondary</span><span>invalid</span><span>disabled</span></span></div>\n        <div class=\"body stack\">\n          <div class=\"field-group\"><label class=\"label\">Workspace name</label><input class=\"input input--secondary\" value=\"Acme, Inc.\"></div>\n          <div class=\"field-group\"><label class=\"label\" style=\"color:var(--danger)\">Slug</label><input class=\"input\" data-invalid value=\"acme inc\" /><span class=\"label-helper\" style=\"color:var(--danger)\">Slugs can't contain spaces.</span></div>\n          <div class=\"field-group\"><label class=\"label\">Domain</label><input class=\"input\" value=\"acme.com\" disabled style=\"opacity:.5;pointer-events:none\"></div>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-magnifying-glass\"></i>Input group</span><span class=\"tags\"><span>with icon</span></span></div>\n        <div class=\"body stack\">\n          <div class=\"input-group\"><i class=\"ph-duotone ph-magnifying-glass\"></i><input placeholder=\"Search components, tokens…\" /><span class=\"mono\" style=\"font-size:11px;color:var(--muted);padding:2px 6px;background:var(--color-default);border-radius:6px\">⌘ K</span></div>\n          <div class=\"input-group\"><i class=\"ph-duotone ph-credit-card\"></i><input placeholder=\"Card number\" value=\"4242 4242 4242 4242\" /></div>\n        </div></div>\n    </div>\n  ","prev":{"href":"components/button.html","title":"Button"},"next":{"href":"components/textarea.html","title":"Textarea"}});</script>
+
+</body>
+</html>
