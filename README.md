@@ -1,5 +1,7 @@
 # Zi UI Skill
 
+**English** · [中文](./README.zh-CN.md)
+
 A portable, token-driven CSS design system — packaged as an agent skill
 compatible with Claude Code, Cursor, GitHub Copilot, and 18+ other agents
 via the [Vercel Skills](https://skills.sh) ecosystem.
