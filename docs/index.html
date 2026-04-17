@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
-<link rel="stylesheet" href="ref/tokens.css" />
-<link rel="stylesheet" href="ref/page.css" />
-<link rel="stylesheet" href="ref/components.css" />
+<link rel="stylesheet" href="../assets/tokens.css" />
+<link rel="stylesheet" href="assets/page.css" />
+<link rel="stylesheet" href="../assets/components.css" />
 <style>
   .index-hero {
     padding: 48px 0 64px;
@@ -38,6 +38,97 @@
     max-width: 540px; margin: 0;
   }
   .index-hero p strong { color: var(--foreground); font-weight: 500; }
+
+  /* --- Introduction section --- */
+  .intro {
+    border: 1px solid var(--separator);
+    border-radius: var(--radius-3xl, 24px);
+    background: var(--surface);
+    padding: 40px 48px;
+    margin-bottom: 56px;
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .intro-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .intro-head .eyebrow {
+    font-size: 11px; font-weight: 500; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.14em;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .intro-head .eyebrow i { font-size: 14px; color: var(--accent); }
+  .lang-toggle {
+    display: inline-flex; gap: 2px; padding: 3px;
+    background: var(--surface-secondary); border-radius: 999px;
+    border: 1px solid var(--separator);
+  }
+  .lang-toggle button {
+    font-family: inherit; font-size: 12px; font-weight: 500;
+    padding: 5px 14px; border-radius: 999px; border: 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    transition: all 250ms cubic-bezier(.2,.7,.3,1);
+  }
+  .lang-toggle button.active {
+    background: var(--background); color: var(--foreground);
+    box-shadow: var(--shadow-surface);
+  }
+  .intro h2 {
+    font-size: 32px; font-weight: 500; letter-spacing: -0.025em;
+    line-height: 1.15; margin: 0;
+  }
+  .intro-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 40px; }
+  .intro-body h3 {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+    margin: 0 0 8px; color: var(--foreground);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .intro-body h3 i { color: var(--accent); font-size: 15px; }
+  .intro-body p {
+    font-size: 13.5px; line-height: 1.6; color: var(--muted); margin: 0 0 10px;
+  }
+  .intro-body p:last-child { margin-bottom: 0; }
+  .intro-body strong { color: var(--foreground); font-weight: 500; }
+  .intro-body code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px; padding: 1px 6px;
+    background: var(--surface-secondary); border-radius: 4px;
+    color: var(--foreground);
+  }
+  .intro-reasons {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    padding-top: 8px; border-top: 1px dashed var(--separator);
+  }
+  .intro-reason {
+    padding: 14px; border: 1px solid var(--separator);
+    border-radius: 12px; background: var(--background);
+  }
+  .intro-reason .num {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .intro-reason .t {
+    font-size: 12.5px; font-weight: 500; color: var(--foreground);
+    margin-bottom: 4px;
+  }
+  .intro-reason .d {
+    font-size: 11.5px; line-height: 1.45; color: var(--muted);
+  }
+  .intro [data-lang-zh] { display: none; }
+  .intro[data-lang="zh"] [data-lang-en] { display: none; }
+  .intro[data-lang="zh"] [data-lang-zh] { display: block; }
+  .intro[data-lang="zh"] .intro-reason .t,
+  .intro[data-lang="zh"] .intro-reason .d,
+  .intro[data-lang="zh"] h3 { display: inline-flex; }
+  .intro[data-lang="zh"] .intro-reason .t { display: block; }
+  .intro[data-lang="zh"] .intro-reason .d { display: block; }
+
+  @media (max-width: 960px) {
+    .intro { padding: 28px 24px; }
+    .intro-body { grid-template-columns: 1fr; }
+    .intro-reasons { grid-template-columns: repeat(2, 1fr); }
+  }
 
   .stat-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
@@ -137,6 +228,79 @@
           <div class="stat"><span class="k">Components</span><span class="v">18</span><span class="d">Primitives, form, feedback, layout</span></div>
           <div class="stat"><span class="k">Color tokens</span><span class="v">24</span><span class="d">Surface, accent, status, soft</span></div>
           <div class="stat"><span class="k">Themes</span><span class="v">2</span><span class="d">Light · Dark · shared tokens</span></div>
+        </div>
+      </section>
+
+      <section class="intro" id="intro" data-lang="en">
+        <div class="intro-head">
+          <span class="eyebrow"><i class="ph-duotone ph-book-open-text"></i><span data-lang-en>Skill Introduction</span><span data-lang-zh>Skill 介绍</span></span>
+          <div class="lang-toggle" role="tablist" aria-label="Language">
+            <button class="active" data-lang-btn="en">English</button>
+            <button data-lang-btn="zh">中文</button>
+          </div>
+        </div>
+
+        <h2 data-lang-en>A design system as a skill, inspired by Claude Design.</h2>
+        <h2 data-lang-zh>以 Skill 形态分发的设计系统——灵感来自 Claude Design。</h2>
+
+        <div class="intro-body">
+          <div>
+            <h3 data-lang-en><i class="ph-duotone ph-lightbulb"></i>Where this came from</h3>
+            <h3 data-lang-zh><i class="ph-duotone ph-lightbulb"></i>它从哪来</h3>
+            <p data-lang-en>On <strong>April 17, 2026</strong>, Anthropic launched <strong>Claude Design</strong> — an AI tool that reads your codebase and brand, and generates a full design system as a browseable folder. No TSX. No framework. Just <code>tokens.css</code>, <code>components.css</code>, and a set of HTML proof pages.</p>
+            <p data-lang-zh><strong>2026 年 4 月 17 日</strong>，Anthropic 发布了 <strong>Claude Design</strong>——一个读你 codebase 和品牌资料、反向生成完整设计系统的 AI 工具。输出是一个可浏览的文件夹：没有 TSX、没有框架，就是 <code>tokens.css</code>、<code>components.css</code>，加一组 HTML 证明页。</p>
+            <p data-lang-en>Staring at that folder, one thing became obvious: the "design system" a Claude Design project ships is <strong>not a React component library</strong>. It's a pure-CSS truth source with a documentation site wrapped around it. This repo packages that idea as a reusable, distributable <strong>agent skill</strong>.</p>
+            <p data-lang-zh>盯着那份文件夹看，有一件事忽然清楚：Claude Design 输出的"设计系统"<strong>不是一个 React 组件库</strong>，而是一份纯 CSS 真相源加一个包裹它的文档站。这个仓库把这个想法打包成了可复用、可分发的 <strong>agent skill</strong>。</p>
+          </div>
+
+          <div>
+            <h3 data-lang-en><i class="ph-duotone ph-tree-structure"></i>The architecture in one sentence</h3>
+            <h3 data-lang-zh><i class="ph-duotone ph-tree-structure"></i>一句话讲架构</h3>
+            <p data-lang-en><strong>One truth source, many downstream consumers.</strong></p>
+            <p data-lang-zh><strong>一份真相源，多个下游消费者。</strong></p>
+            <p data-lang-en>The DNA is <code>assets/tokens.css</code> — every color, radius, spacing, and shadow decision lives there. <code>components.css</code> projects those tokens into semantic classes (<code>.button</code>, <code>.card</code>). Everything else in this repo is a consumer of that truth: the SKILL for AI agents, this docs site for humans, and any future React/Vue/email-template layer you'd add downstream.</p>
+            <p data-lang-zh>DNA 是 <code>assets/tokens.css</code>——所有颜色、圆角、间距、阴影决策都在那里。<code>components.css</code> 把这些 token 投影成语义类（<code>.button</code>、<code>.card</code>）。仓库里其他一切都是这份真相源的下游消费者：给 AI 的 SKILL、给人的这个文档站，以及未来可以加的 React / Vue / 邮件模板层。</p>
+            <p data-lang-en>Change <code>--accent</code> once, and every page, every component, every downstream consumer follows. That's not a convenience — it's the architecture itself.</p>
+            <p data-lang-zh>改一次 <code>--accent</code>，每个页面、每个组件、每个下游消费者都跟着变。这不是"便利"——<strong>这就是架构本身</strong>。</p>
+          </div>
+
+          <div class="intro-reasons">
+            <div class="intro-reason">
+              <div class="num">01</div>
+              <div class="t" data-lang-en>AI reads CSS best</div>
+              <div class="t" data-lang-zh>AI 最擅长读 CSS</div>
+              <div class="d" data-lang-en>Semantic HTML + CSS variables are the densest, least-ambiguous language in Claude's training data. No <code>cva()</code> indirection to unwind.</div>
+              <div class="d" data-lang-zh>语义 HTML + CSS 变量是 Claude 训练语料里最稠密、最无歧义的语言。没有 <code>cva()</code> 这层中介要 AI 翻译。</div>
+            </div>
+            <div class="intro-reason">
+              <div class="num">02</div>
+              <div class="t" data-lang-en>Framework independence</div>
+              <div class="t" data-lang-zh>框架独立</div>
+              <div class="d" data-lang-en>Two CSS files work with React, Vue, Svelte, Astro, plain HTML, even email templates. TSX locks you to one runtime.</div>
+              <div class="d" data-lang-zh>两个 CSS 文件可以用在 React、Vue、Svelte、Astro、纯 HTML，甚至邮件模板里。TSX 把你锁死在一个 runtime。</div>
+            </div>
+            <div class="intro-reason">
+              <div class="num">03</div>
+              <div class="t" data-lang-en>Designers can read it</div>
+              <div class="t" data-lang-zh>设计师读得懂</div>
+              <div class="d" data-lang-en>Open <code>tokens.css</code>, see every decision. No Storybook build, no TypeScript to parse. Visual proofs live as browseable HTML.</div>
+              <div class="d" data-lang-zh>打开 <code>tokens.css</code> 就能看所有决策。不用跑 Storybook、不用解析 TypeScript。视觉证明就是可浏览的 HTML。</div>
+            </div>
+            <div class="intro-reason">
+              <div class="num">04</div>
+              <div class="t" data-lang-en>Restraint by design</div>
+              <div class="t" data-lang-zh>刻意克制</div>
+              <div class="d" data-lang-en>No runtime JS, no <code>ZiProvider</code>, no npm dependency graph. The less the skill ships, the more places it fits.</div>
+              <div class="d" data-lang-zh>没有 runtime JS，没有 <code>ZiProvider</code>，没有 npm 依赖图。skill 装得越少，它能去的地方就越多。</div>
+            </div>
+            <div class="intro-reason">
+              <div class="num">05</div>
+              <div class="t" data-lang-en>Outlives frameworks</div>
+              <div class="t" data-lang-zh>比框架活得久</div>
+              <div class="d" data-lang-en>Three years from now, React 19 may be legacy. Your <code>tokens.css</code> still runs. CSS and HTML are the Web's bedrock.</div>
+              <div class="d" data-lang-zh>三年后 React 19 可能已成遗产，你的 <code>tokens.css</code> 照样跑。CSS 和 HTML 是 Web 的基岩。</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -390,6 +554,26 @@
     window.__BASE = "";
     window.__CURRENT = "home";
   </script>
-  <script src="ref/nav2.js"></script>
+  <script src="assets/nav2.js"></script>
+  <script>
+    // Introduction language toggle — persists in localStorage, defaults to browser UI language
+    (function () {
+      const intro = document.getElementById("intro");
+      if (!intro) return;
+      const saved = localStorage.getItem("zi-intro-lang");
+      const defaultLang = saved || (navigator.language.startsWith("zh") ? "zh" : "en");
+      const setLang = (lang) => {
+        intro.setAttribute("data-lang", lang);
+        intro.querySelectorAll("[data-lang-btn]").forEach((b) => {
+          b.classList.toggle("active", b.dataset.langBtn === lang);
+        });
+        localStorage.setItem("zi-intro-lang", lang);
+      };
+      setLang(defaultLang);
+      intro.querySelectorAll("[data-lang-btn]").forEach((btn) => {
+        btn.addEventListener("click", () => setLang(btn.dataset.langBtn));
+      });
+    })();
+  </script>
 </body>
 </html>

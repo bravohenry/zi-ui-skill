@@ -5,17 +5,74 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Zi UI v3 — Button</title>
+<!--
+  ROLE: Style anchor for AI agents consuming this skill.
+  Minimal standalone page — only loads the two truth-source CSS files.
+  No navigation shell, no docs-site chrome.
+-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
 <link rel="stylesheet" href="../assets/tokens.css" />
-<link rel="stylesheet" href="../assets/page.css" />
 <link rel="stylesheet" href="../assets/components.css" />
-<script src="../assets/shell.js"></script>
+<style>
+  body {
+    margin: 0; padding: 48px 56px; max-width: 960px;
+    font: 400 14px/1.5 "Geist", sans-serif;
+    background: var(--background); color: var(--foreground);
+  }
+  header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--separator); }
+  header .label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; }
+  header h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; margin: 8px 0 10px; }
+  header p { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 640px; }
+  .demo-grid { display: flex; flex-direction: column; gap: 24px; }
+  .demo { border: 1px solid var(--separator); border-radius: 16px; overflow: hidden; background: var(--surface); }
+  .demo .head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--separator); background: var(--surface-secondary); }
+  .demo .head .title { font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: var(--foreground); }
+  .demo .head .title i { color: var(--accent); font-size: 14px; }
+  .demo .head .tags { display: inline-flex; gap: 6px; }
+  .demo .head .tags span { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--muted); padding: 2px 6px; background: var(--background); border: 1px solid var(--separator); border-radius: 4px; }
+  .demo .body { padding: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+</style>
 </head>
 <body>
-<script>renderLayout({"key":"button","title":"Button","depth":1,"section":"Component","label":"Component · 01","desc":"Seven variants × three sizes × icon-only modifier. All states scale <span class=\"mono\">0.97</span> on press with a 250ms smooth transition.","content":"\n    <div class=\"demo-grid\">\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-stack\"></i>Variants</span><span class=\"tags\"><span>primary</span><span>secondary</span><span>tertiary</span><span>ghost</span><span>outline</span><span>danger</span></span></div>\n        <div class=\"body\">\n          <button class=\"button button--primary\">Primary</button>\n          <button class=\"button button--secondary\">Secondary</button>\n          <button class=\"button button--tertiary\">Tertiary</button>\n          <button class=\"button button--ghost\">Ghost</button>\n          <button class=\"button button--outline\">Outline</button>\n          <button class=\"button button--danger\">Danger</button>\n          <button class=\"button button--danger-soft\">Danger soft</button>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-ruler\"></i>Sizes</span><span class=\"tags\"><span>sm · 32</span><span>md · 36</span><span>lg · 40</span></span></div>\n        <div class=\"body\">\n          <button class=\"button button--primary button--sm\">Small</button>\n          <button class=\"button button--primary\">Medium</button>\n          <button class=\"button button--primary button--lg\">Large</button>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-sparkle\"></i>With icons</span><span class=\"tags\"><span>leading</span><span>trailing</span></span></div>\n        <div class=\"body\">\n          <button class=\"button button--primary\"><i class=\"ph-duotone ph-plus\"></i>New project</button>\n          <button class=\"button button--outline\">Continue<i class=\"ph-duotone ph-arrow-right\"></i></button>\n          <button class=\"button button--ghost\"><i class=\"ph-duotone ph-clock\"></i>Scheduled</button>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-dot\"></i>Icon &amp; states</span><span class=\"tags\"><span>icon</span><span>disabled</span></span></div>\n        <div class=\"body\">\n          <button class=\"button button--secondary button--icon\" aria-label=\"search\"><i class=\"ph-duotone ph-magnifying-glass\"></i></button>\n          <button class=\"button button--ghost button--icon\" aria-label=\"more\"><i class=\"ph-duotone ph-dots-three\"></i></button>\n          <button class=\"button button--outline button--icon\" aria-label=\"settings\"><i class=\"ph-duotone ph-gear\"></i></button>\n          <button class=\"button button--primary\" disabled>Disabled</button>\n          <button class=\"button button--outline\" disabled>Disabled</button>\n        </div></div>\n    </div>\n  ","prev":{"href":"foundations/motion.html","title":"Motion"},"next":{"href":"components/input.html","title":"Input"}});</script>
-
+<header>
+  <div class="label">Component · 01</div>
+  <h1>Button</h1>
+  <p>Seven variants × three sizes × icon-only modifier. All states scale <span class="mono">0.97</span> on press with a 250ms smooth transition.</p>
+</header>
+<div class="demo-grid">
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-stack"></i>Variants</span><span class="tags"><span>primary</span><span>secondary</span><span>tertiary</span><span>ghost</span><span>outline</span><span>danger</span></span></div>
+        <div class="body">
+          <button class="button button--primary">Primary</button>
+          <button class="button button--secondary">Secondary</button>
+          <button class="button button--tertiary">Tertiary</button>
+          <button class="button button--ghost">Ghost</button>
+          <button class="button button--outline">Outline</button>
+          <button class="button button--danger">Danger</button>
+          <button class="button button--danger-soft">Danger soft</button>
+        </div></div>
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-ruler"></i>Sizes</span><span class="tags"><span>sm · 32</span><span>md · 36</span><span>lg · 40</span></span></div>
+        <div class="body">
+          <button class="button button--primary button--sm">Small</button>
+          <button class="button button--primary">Medium</button>
+          <button class="button button--primary button--lg">Large</button>
+        </div></div>
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-sparkle"></i>With icons</span><span class="tags"><span>leading</span><span>trailing</span></span></div>
+        <div class="body">
+          <button class="button button--primary"><i class="ph-duotone ph-plus"></i>New project</button>
+          <button class="button button--outline">Continue<i class="ph-duotone ph-arrow-right"></i></button>
+          <button class="button button--ghost"><i class="ph-duotone ph-clock"></i>Scheduled</button>
+        </div></div>
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-dot"></i>Icon &amp; states</span><span class="tags"><span>icon</span><span>disabled</span></span></div>
+        <div class="body">
+          <button class="button button--secondary button--icon" aria-label="search"><i class="ph-duotone ph-magnifying-glass"></i></button>
+          <button class="button button--ghost button--icon" aria-label="more"><i class="ph-duotone ph-dots-three"></i></button>
+          <button class="button button--outline button--icon" aria-label="settings"><i class="ph-duotone ph-gear"></i></button>
+          <button class="button button--primary" disabled>Disabled</button>
+          <button class="button button--outline" disabled>Disabled</button>
+        </div></div>
+    </div>
 </body>
 </html>

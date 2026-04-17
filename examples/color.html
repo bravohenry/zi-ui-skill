@@ -5,60 +5,52 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Zi UI v3 — Color</title>
+<!--
+  ROLE: Style anchor for AI agents consuming this skill.
+  Minimal standalone page — only loads the two truth-source CSS files.
+  No navigation shell, no docs-site chrome.
+-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
 <link rel="stylesheet" href="../assets/tokens.css" />
-<link rel="stylesheet" href="../assets/page.css" />
 <link rel="stylesheet" href="../assets/components.css" />
-<script src="../assets/shell.js"></script>
+<style>
+  body {
+    margin: 0; padding: 48px 56px; max-width: 960px;
+    font: 400 14px/1.5 "Geist", sans-serif;
+    background: var(--background); color: var(--foreground);
+  }
+  header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--separator); }
+  header .label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; }
+  header h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; margin: 8px 0 10px; }
+  header p { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 640px; }
+  .demo-grid { display: flex; flex-direction: column; gap: 24px; }
+  .demo { border: 1px solid var(--separator); border-radius: 16px; overflow: hidden; background: var(--surface); }
+  .demo .head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--separator); background: var(--surface-secondary); }
+  .demo .head .title { font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: var(--foreground); }
+  .demo .head .title i { color: var(--accent); font-size: 14px; }
+  .demo .head .tags { display: inline-flex; gap: 6px; }
+  .demo .head .tags span { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--muted); padding: 2px 6px; background: var(--background); border: 1px solid var(--separator); border-radius: 4px; }
+  .demo .body { padding: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+</style>
 </head>
 <body>
-<script>renderLayout({"key":"color","title":"Color","depth":1,"section":"Foundation","label":"Foundation · 01","desc":"Semantic tokens authored in OKLCH. Every role — <span class=\"mono\">accent</span>, <span class=\"mono\">success</span>, <span class=\"mono\">danger</span> — ships a base, hover, soft, and foreground pair. Compose against tokens, never raw values.","content":"\n    <section>\n      <h3 class=\"sub\">Surface &amp; base <span class=\"tag\">structural</span></h3>\n      <div class=\"token-list\" id=\"tokens-surface\"></div>\n      <h3 class=\"sub\">Accent &amp; default <span class=\"tag\">interactive</span></h3>\n      <div class=\"token-list\" id=\"tokens-accent\"></div>\n      <h3 class=\"sub\">Status <span class=\"tag\">semantic</span></h3>\n      <div class=\"token-list\" id=\"tokens-status\"></div>\n      <h3 class=\"sub\">Soft variants <span class=\"tag\">15% mix</span></h3>\n      <div class=\"token-grid\" id=\"tokens-soft\"></div>\n    </section>\n  ","prev":{"href":"index.html","title":"Zi UI v3"},"next":{"href":"foundations/typography.html","title":"Typography"}});</script>
-<script>
-
-    const tokens = {
-      surface: [
-        { name: 'background', desc: 'Page background', v: '--background' },
-        { name: 'foreground', desc: 'Primary text color', v: '--foreground' },
-        { name: 'surface', desc: 'Cards, accordions', v: '--surface' },
-        { name: 'surface-secondary', desc: 'Recessed panels', v: '--surface-secondary' },
-        { name: 'surface-tertiary', desc: 'Nested panels', v: '--surface-tertiary' },
-        { name: 'overlay', desc: 'Popovers, modals, menus', v: '--overlay' },
-        { name: 'muted', desc: 'Secondary text', v: '--muted' },
-        { name: 'border', desc: 'Component borders', v: '--border' },
-        { name: 'separator', desc: 'Horizontal rules', v: '--separator' },
-      ],
-      accent: [
-        { name: 'accent', desc: 'Primary brand', v: '--accent' },
-        { name: 'accent-foreground', desc: 'Text on accent', v: '--accent-foreground' },
-        { name: 'default', desc: 'Quiet interactive surface', v: '--default' },
-        { name: 'default-foreground', desc: 'Text on default', v: '--default-foreground' },
-        { name: 'focus', desc: 'Focus ring', v: '--focus' },
-        { name: 'link', desc: 'Links', v: '--link' },
-      ],
-      status: [
-        { name: 'success', desc: 'Positive confirmation', v: '--success' },
-        { name: 'warning', desc: 'Caution', v: '--warning' },
-        { name: 'danger', desc: 'Destructive / errors', v: '--danger' },
-      ],
-      soft: [
-        { name: 'accent-soft', desc: '15% mix of accent', v: '--color-accent-soft' },
-        { name: 'success-soft', desc: '15% mix of success', v: '--color-success-soft' },
-        { name: 'warning-soft', desc: '15% mix of warning', v: '--color-warning-soft' },
-        { name: 'danger-soft', desc: '15% mix of danger', v: '--color-danger-soft' },
-      ],
-    };
-    const list = (id, arr) => document.getElementById(id).innerHTML = arr.map(t =>
-      '<div class="token-row"><div class="dot" style="background:var(' + t.v + ')"></div><div class="name">' + t.name + '<small>' + t.desc + '</small></div><div class="val">' + t.v + '</div></div>').join('');
-    const grid = (id, arr) => document.getElementById(id).innerHTML = arr.map(t =>
-      '<div class="swatch"><div class="chip" style="background:var(' + t.v + ')"></div><div class="meta"><div class="name">' + t.name + '</div><div class="val">' + t.v + '</div><div class="val" style="color:var(--muted)">' + t.desc + '</div></div></div>').join('');
-    list('tokens-surface', tokens.surface);
-    list('tokens-accent', tokens.accent);
-    list('tokens-status', tokens.status);
-    grid('tokens-soft', tokens.soft);
-  
-</script>
+<header>
+  <div class="label">Foundation · 01</div>
+  <h1>Color</h1>
+  <p>Semantic tokens authored in OKLCH. Every role — <span class="mono">accent</span>, <span class="mono">success</span>, <span class="mono">danger</span> — ships a base, hover, soft, and foreground pair. Compose against tokens, never raw values.</p>
+</header>
+<section>
+      <h3 class="sub">Surface &amp; base <span class="tag">structural</span></h3>
+      <div class="token-list" id="tokens-surface"></div>
+      <h3 class="sub">Accent &amp; default <span class="tag">interactive</span></h3>
+      <div class="token-list" id="tokens-accent"></div>
+      <h3 class="sub">Status <span class="tag">semantic</span></h3>
+      <div class="token-list" id="tokens-status"></div>
+      <h3 class="sub">Soft variants <span class="tag">15% mix</span></h3>
+      <div class="token-grid" id="tokens-soft"></div>
+    </section>
 </body>
 </html>

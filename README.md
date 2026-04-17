@@ -92,49 +92,46 @@ tokens, and you'll have your own Zi UI.
 
 ## Repository roles: Skill vs Docs Site
 
-This repo holds **two things at once**, both pointing at the same truth source:
+The repo is split cleanly into **two folders with zero overlap**, both
+pointing at the same truth source:
 
 ```
-                  assets/  (the truth source)
-                 ├ tokens.css
-                 └ components.css
-                       │
-         ┌─────────────┴─────────────┐
-         ▼                           ▼
-    SKILL CONSUMER               DOCS CONSUMER
-    (for AI agents)             (for humans browsing)
-    ─────────────────           ──────────────────
-    SKILL.md                    index.html
-    examples/*  ← style anchor  foundations/*.html
-    references/*                components/*.html
-                                assets/page.css
-                                assets/shell.js
-                                assets/nav2.js
+              assets/  (the ONE truth source — shared)
+             ├ tokens.css
+             └ components.css
+                    │
+        ┌───────────┴───────────┐
+        ▼                       ▼
+   THE SKILL                THE DOCS SITE
+   (at repo root)           (in docs/)
+   ──────────────           ──────────────
+   SKILL.md                 docs/index.html
+   examples/*   (anchors)   docs/foundations/*.html
+   references/*             docs/components/*.html
+                            docs/assets/page.css   (shell)
+                            docs/assets/shell.js   (shell)
+                            docs/assets/nav2.js    (shell)
 ```
 
-**The skill** is what `npx skills add` installs. It contains `SKILL.md`,
-the two CSS files in `assets/`, a handful of style-anchor pages in
-`examples/`, and judgment references in `references/`. That's what the
-AI reads.
+**The skill** lives at the repo root. `npx skills add` installs exactly
+this: `SKILL.md`, `assets/`, `examples/`, `references/`. An AI agent
+reading the skill never touches `docs/`.
 
-**The docs site** is what [bravohenry.github.io/zi-ui-skill](https://bravohenry.github.io/zi-ui-skill/)
-serves. It has a root `index.html` plus full component / foundation pages
-in `components/` and `foundations/` — meant for humans to browse, validate,
-and learn from.
+**The docs site** lives entirely in `docs/` and is served at
+[bravohenry.github.io/zi-ui-skill](https://bravohenry.github.io/zi-ui-skill/).
+It has its own self-contained shell (`docs/assets/page.css` + two JS
+files) used nowhere else. Humans browse it to validate the visual
+language and learn the architecture.
 
-Both consumers read from the same `assets/tokens.css` + `assets/components.css`.
-The docs site additionally loads `assets/page.css` / `shell.js` / `nav2.js`
-as its UI shell — these are docs-only and the AI never touches them.
+**Both consumers read from the same two files** at the repo root:
+`assets/tokens.css` and `assets/components.css`. Zero duplication. Change
+`--accent` once and every single page across both the skill and the docs
+site follows.
 
-This two-sided layout **is the whole point of the architecture this repo
-demonstrates**: one truth source, many downstream consumers. A React
-component library would be a third consumer. An email template system
-would be a fourth. They all read from the same `tokens.css`.
-
-So yes, you'll see `examples/button.html` and `components/button.html`
-side by side — not duplication, but two *cross-sections* of the same
-system: one minimal (for AI to learn rhythm), one exhaustive (for humans
-to browse variants).
+This two-folder split **is the architectural thesis this repo demonstrates**:
+one truth source, many downstream consumers. A React component library
+could be a third folder. An email template system could be a fourth. All
+reading from the same `assets/tokens.css`.
 
 ---
 
@@ -147,18 +144,16 @@ zi-ui-skill/
 ├── README.md                   ← this file (English)
 ├── README.zh-CN.md             ← Chinese version
 │
-├── assets/                     ← THE SHARED TRUTH SOURCE
+├── assets/                     ← THE ONE TRUTH SOURCE (shared by skill + docs)
 │   ├── tokens.css              ←   the DNA — every design decision
-│   ├── components.css          ←   tokens → semantic classes (.button, .card, ...)
-│   ├── page.css                ←   docs-site shell styles (docs-only)
-│   ├── shell.js                ←   docs-site layout renderer (docs-only)
-│   └── nav2.js                 ←   docs-site navigation (docs-only)
+│   └── components.css          ←   tokens → semantic classes (.button, .card, ...)
 │
-├── examples/                   ← SKILL: style anchors (AI learns rhythm from these)
-│   ├── button.html             ←   minimal compositions, one per primitive
+│   ─── SKILL ───
+│
+├── examples/                   ← SKILL: standalone style anchors (AI learns rhythm)
+│   ├── button.html             ←   self-contained, loads only the two CSS above
 │   ├── card.html · chip.html · color.html
 │   ├── input.html · table.html · typography.html
-│   ├── index.html              ←   (v2 consolidated anchor, legacy)
 │   └── settings.tsx            ←   React wrapper sample (3+ reuse rule)
 │
 ├── references/                 ← SKILL: judgment externalized (AI loads on demand)
@@ -169,17 +164,30 @@ zi-ui-skill/
 │   ├── do-dont.md              ←   ✅ / ❌ anti-pattern pairs
 │   └── react-adapters.md       ←   thin wrapper recipes for React projects
 │
-├── index.html                  ← DOCS SITE: GitHub Pages home
-├── foundations/                ← DOCS SITE: token visual proofs (for humans)
-│   ├── color.html · motion.html · radius.html
-│   └── shadow.html · spacing.html · typography.html
-└── components/                 ← DOCS SITE: exhaustive component pages (for humans)
-    ├── alert.html · avatar.html · badge.html · button.html
-    ├── card.html · checkbox.html · chip.html · input.html
-    ├── menu.html · modal.html · progress.html · radio.html
-    ├── slider.html · switch.html · table.html · tabs.html
-    └── textarea.html · tooltip.html
+│   ─── DOCS SITE (GitHub Pages) ───
+│
+└── docs/                       ← DOCS SITE: self-contained, served by Pages
+    ├── index.html              ←   homepage with bilingual Skill Introduction
+    ├── assets/                 ←   docs-only shell (not part of the skill)
+    │   ├── page.css            ←     layout + chrome styles
+    │   ├── shell.js            ←     layout renderer
+    │   └── nav2.js             ←     sidebar navigation
+    ├── foundations/            ←   token visual proofs
+    │   ├── color.html · motion.html · radius.html
+    │   └── shadow.html · spacing.html · typography.html
+    └── components/             ←   exhaustive component pages
+        ├── alert.html · avatar.html · badge.html · button.html
+        ├── card.html · checkbox.html · chip.html · input.html
+        ├── menu.html · modal.html · progress.html · radio.html
+        ├── slider.html · switch.html · table.html · tabs.html
+        └── textarea.html · tooltip.html
 ```
+
+All 24 pages under `docs/foundations/` and `docs/components/` reference
+`../../assets/tokens.css` and `../../assets/components.css` — they reach
+back out of `docs/` to consume the shared truth source. The `docs/assets/`
+folder contains only the docs-site shell and is never referenced by the
+skill.
 
 ### Reading order (if you want to learn the architecture)
 
@@ -187,7 +195,7 @@ zi-ui-skill/
 2. **`assets/tokens.css`** — 5 minutes. See the complete truth source.
 3. **`assets/components.css`** — 10 minutes. See how tokens become classes.
 4. **`SKILL.md`** — 15 minutes. Read the rules the AI follows.
-5. **`examples/` and `references/`** — skim. These are what the AI loads on demand.
+5. **`examples/` and `references/`** — skim. These are the standalone style anchors and judgment docs the AI loads on demand.
 
 One hour and you'll understand the whole thing.
 

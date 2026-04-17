@@ -90,45 +90,41 @@ index.html          文档站入口
 
 ## 仓库的两个身份：Skill vs 文档站
 
-这个仓库**同时装着两个东西**，两个都指向同一份真相源：
+这个仓库**明确切成两半、零重叠**，两半都指向同一份真相源：
 
 ```
-                  assets/  （真相源）
-                 ├ tokens.css
-                 └ components.css
-                       │
-         ┌─────────────┴─────────────┐
-         ▼                           ▼
-    SKILL 消费者                 文档站消费者
-    （给 AI agent 读）           （给人类浏览）
-    ─────────────────           ──────────────────
-    SKILL.md                    index.html
-    examples/*  ← 风格锚点      foundations/*.html
-    references/*                components/*.html
-                                assets/page.css
-                                assets/shell.js
-                                assets/nav2.js
+            assets/  （仅此一份真相源，双方共用）
+           ├ tokens.css
+           └ components.css
+                  │
+      ┌───────────┴───────────┐
+      ▼                       ▼
+   Skill 本体              文档站
+   （在仓库根目录）        （在 docs/ 里）
+   ──────────────          ──────────────
+   SKILL.md                docs/index.html
+   examples/*  （锚点）    docs/foundations/*.html
+   references/*            docs/components/*.html
+                           docs/assets/page.css    （壳）
+                           docs/assets/shell.js    （壳）
+                           docs/assets/nav2.js     （壳）
 ```
 
-**Skill** 是 `npx skills add` 安装的那部分。它包含 `SKILL.md`、`assets/` 里
-的两个 CSS 文件、`examples/` 里的风格锚点页、和 `references/` 里的判断
-力外化文档——AI 读的就是这些。
+**Skill 本体**在仓库根目录。`npx skills add` 装的就是这些：
+`SKILL.md`、`assets/`、`examples/`、`references/`。AI 读 skill 的时候
+**永远不会碰 `docs/`**。
 
-**文档站** 是 [bravohenry.github.io/zi-ui-skill](https://bravohenry.github.io/zi-ui-skill/) 上托管的那部分。它包含根目录的
-`index.html` 加上 `components/` 和 `foundations/` 里的完整组件/基础页——
-给人类浏览、验收、学习架构用。
+**文档站**整体装在 `docs/` 里，托管在 [bravohenry.github.io/zi-ui-skill](https://bravohenry.github.io/zi-ui-skill/)。
+它自带独立的壳（`docs/assets/page.css` 加两个 JS 文件），这套壳别的地方
+用不到。人类浏览它来验收视觉语言、学习架构。
 
-两个消费者都读同一份 `assets/tokens.css` + `assets/components.css`。
-文档站额外加载 `assets/page.css` / `shell.js` / `nav2.js` 作为 UI 壳——
-这几个是文档站专用，AI 永远不会碰。
+**两个消费者都读根目录的同两个文件**：`assets/tokens.css` 和
+`assets/components.css`。**零重复副本**。改一次 `--accent`，skill 和
+文档站每一个页面都跟着变。
 
-**这种"一份真相源、多个下游消费者"的切分，正是这个仓库要演示的整个
-架构思想**。一个 React 组件库可以是第三个消费者，一个邮件模板系统
-可以是第四个。它们都从同一个 `tokens.css` 长出来。
-
-所以你会看到 `examples/button.html` 和 `components/button.html` 并存——
-**不是冗余，是同一个系统的两种截面**：一份精简（给 AI 学风格），一份
-详尽（给人浏览所有变体）。
+这种"一份真相源、多文件夹消费者"的切分，**正是这个仓库要演示的架构
+论点**：一份 DNA，多个下游。React 组件库可以是第三个文件夹，邮件模板
+系统可以是第四个——全都读同一份 `assets/tokens.css`。
 
 ---
 
@@ -141,18 +137,16 @@ zi-ui-skill/
 ├── README.md                   ← 英文版
 ├── README.zh-CN.md             ← 本文件
 │
-├── assets/                     ← 共享的真相源
+├── assets/                     ← 唯一真相源（skill + 文档站共用）
 │   ├── tokens.css              ←   DNA — 所有设计决策
-│   ├── components.css          ←   tokens 投影为语义类（.button、.card...）
-│   ├── page.css                ←   文档站壳样式（文档站专用）
-│   ├── shell.js                ←   文档站布局渲染器（文档站专用）
-│   └── nav2.js                 ←   文档站导航（文档站专用）
+│   └── components.css          ←   tokens 投影为语义类（.button、.card...）
 │
-├── examples/                   ← SKILL：风格锚点（AI 从这里学视觉节奏）
-│   ├── button.html             ←   精简组合，每类 primitive 一页
+│   ─── Skill 本体 ───
+│
+├── examples/                   ← SKILL：独立风格锚点页（AI 从这里学视觉节奏）
+│   ├── button.html             ←   自包含，只加载上面两个 CSS
 │   ├── card.html · chip.html · color.html
 │   ├── input.html · table.html · typography.html
-│   ├── index.html              ←   （v2 汇总锚点，遗留）
 │   └── settings.tsx            ←   React 按需包装样例（3+ 使用才生成）
 │
 ├── references/                 ← SKILL：判断力外化（AI 按需加载）
@@ -163,17 +157,29 @@ zi-ui-skill/
 │   ├── do-dont.md              ←   ✅ / ❌ 反例对照
 │   └── react-adapters.md       ←   React 项目如何生成轻量包装
 │
-├── index.html                  ← 文档站：GitHub Pages 首页
-├── foundations/                ← 文档站：token 视觉证明（给人浏览）
-│   ├── color.html · motion.html · radius.html
-│   └── shadow.html · spacing.html · typography.html
-└── components/                 ← 文档站：完整组件页（给人浏览）
-    ├── alert.html · avatar.html · badge.html · button.html
-    ├── card.html · checkbox.html · chip.html · input.html
-    ├── menu.html · modal.html · progress.html · radio.html
-    ├── slider.html · switch.html · table.html · tabs.html
-    └── textarea.html · tooltip.html
+│   ─── 文档站（GitHub Pages 托管）───
+│
+└── docs/                       ← 文档站：自包含，Pages 的 source 路径
+    ├── index.html              ←   首页，带双语 Skill Introduction
+    ├── assets/                 ←   文档站专属壳（不是 skill 的一部分）
+    │   ├── page.css            ←     布局 + chrome 样式
+    │   ├── shell.js            ←     布局渲染器
+    │   └── nav2.js             ←     侧边栏导航
+    ├── foundations/            ←   token 视觉证明
+    │   ├── color.html · motion.html · radius.html
+    │   └── shadow.html · spacing.html · typography.html
+    └── components/             ←   完整组件页
+        ├── alert.html · avatar.html · badge.html · button.html
+        ├── card.html · checkbox.html · chip.html · input.html
+        ├── menu.html · modal.html · progress.html · radio.html
+        ├── slider.html · switch.html · table.html · tabs.html
+        └── textarea.html · tooltip.html
 ```
+
+`docs/foundations/` 和 `docs/components/` 下 24 个页面都引用
+`../../assets/tokens.css` 和 `../../assets/components.css`——它们跨出
+`docs/` 到根目录读共享的真相源。`docs/assets/` 只装文档站自己的壳，
+skill 永远不碰它。
 
 ### 阅读顺序（如果你想学架构）
 

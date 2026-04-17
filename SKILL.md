@@ -26,13 +26,13 @@ use them.
 ```
 SKILL.md                          ← this file (navigation + hard rules)
 assets/
-  tokens.css                      ← copy into every target project
-  components.css                  ← copy into every target project
+  tokens.css                      ← copy into every target project (the DNA)
+  components.css                  ← copy into every target project (semantic classes)
 examples/
-  index.html                      ← full system overview
   button.html, card.html, input.html, chip.html,
   table.html, color.html, typography.html
-                                  ← visual anchors for each primitive
+                                  ← standalone style anchors, one per primitive
+                                    (no shell, no nav — just the component + the two CSS files)
   settings.tsx                    ← React on-demand wrapper sample
 references/
   component-api.md                ← full class inventory (read when composing UI)
@@ -43,9 +43,14 @@ references/
   react-adapters.md               ← wrapper recipes (read when working in a React project)
 ```
 
+The `docs/` folder at the repo root is the **public documentation site**
+(GitHub Pages), not part of the skill. It consumes the same `assets/tokens.css`
+and `assets/components.css` but is meant for humans, not agents. Ignore it
+during skill execution.
+
 **Progressive reading order:**
 1. Read this file once.
-2. Skim `examples/index.html` to absorb the visual rhythm.
+2. Skim a few `examples/*.html` pages (button, card, input) to absorb the visual rhythm. For a full-system preview, the public docs site at `docs/index.html` is the most complete view.
 3. Load `references/component-api.md` when composing a page.
 4. Load `references/react-adapters.md` **only** if the target project is React.
 5. Load `references/color-guide.md` / `do-dont.md` when a specific choice needs disambiguation.

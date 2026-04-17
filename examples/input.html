@@ -5,17 +5,60 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Zi UI v3 — Input</title>
+<!--
+  ROLE: Style anchor for AI agents consuming this skill.
+  Minimal standalone page — only loads the two truth-source CSS files.
+  No navigation shell, no docs-site chrome.
+-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
 <link rel="stylesheet" href="../assets/tokens.css" />
-<link rel="stylesheet" href="../assets/page.css" />
 <link rel="stylesheet" href="../assets/components.css" />
-<script src="../assets/shell.js"></script>
+<style>
+  body {
+    margin: 0; padding: 48px 56px; max-width: 960px;
+    font: 400 14px/1.5 "Geist", sans-serif;
+    background: var(--background); color: var(--foreground);
+  }
+  header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--separator); }
+  header .label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; }
+  header h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; margin: 8px 0 10px; }
+  header p { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 640px; }
+  .demo-grid { display: flex; flex-direction: column; gap: 24px; }
+  .demo { border: 1px solid var(--separator); border-radius: 16px; overflow: hidden; background: var(--surface); }
+  .demo .head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--separator); background: var(--surface-secondary); }
+  .demo .head .title { font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: var(--foreground); }
+  .demo .head .title i { color: var(--accent); font-size: 14px; }
+  .demo .head .tags { display: inline-flex; gap: 6px; }
+  .demo .head .tags span { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--muted); padding: 2px 6px; background: var(--background); border: 1px solid var(--separator); border-radius: 4px; }
+  .demo .body { padding: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+</style>
 </head>
 <body>
-<script>renderLayout({"key":"input","title":"Input","depth":1,"section":"Component","label":"Component · 02","desc":"Fields use <span class=\"mono\">--radius-field</span> (12px), a transparent border by default, and a high-contrast focus ring built from the accent token.","content":"\n    <div class=\"demo-grid\">\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-text-t\"></i>Primary</span><span class=\"tags\"><span>default</span><span>focus</span></span></div>\n        <div class=\"body stack\">\n          <div class=\"field-group\"><label class=\"label\">Email</label><input class=\"input\" placeholder=\"you@zi.ui\"><span class=\"label-helper\">We'll never share your email.</span></div>\n          <div class=\"field-group\"><label class=\"label\">Password</label><input class=\"input\" type=\"password\" value=\"••••••••\"></div>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-warning\"></i>States</span><span class=\"tags\"><span>secondary</span><span>invalid</span><span>disabled</span></span></div>\n        <div class=\"body stack\">\n          <div class=\"field-group\"><label class=\"label\">Workspace name</label><input class=\"input input--secondary\" value=\"Acme, Inc.\"></div>\n          <div class=\"field-group\"><label class=\"label\" style=\"color:var(--danger)\">Slug</label><input class=\"input\" data-invalid value=\"acme inc\" /><span class=\"label-helper\" style=\"color:var(--danger)\">Slugs can't contain spaces.</span></div>\n          <div class=\"field-group\"><label class=\"label\">Domain</label><input class=\"input\" value=\"acme.com\" disabled style=\"opacity:.5;pointer-events:none\"></div>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-magnifying-glass\"></i>Input group</span><span class=\"tags\"><span>with icon</span></span></div>\n        <div class=\"body stack\">\n          <div class=\"input-group\"><i class=\"ph-duotone ph-magnifying-glass\"></i><input placeholder=\"Search components, tokens…\" /><span class=\"mono\" style=\"font-size:11px;color:var(--muted);padding:2px 6px;background:var(--color-default);border-radius:6px\">⌘ K</span></div>\n          <div class=\"input-group\"><i class=\"ph-duotone ph-credit-card\"></i><input placeholder=\"Card number\" value=\"4242 4242 4242 4242\" /></div>\n        </div></div>\n    </div>\n  ","prev":{"href":"components/button.html","title":"Button"},"next":{"href":"components/textarea.html","title":"Textarea"}});</script>
-
+<header>
+  <div class="label">Component · 02</div>
+  <h1>Input</h1>
+  <p>Fields use <span class="mono">--radius-field</span> (12px), a transparent border by default, and a high-contrast focus ring built from the accent token.</p>
+</header>
+<div class="demo-grid">
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-text-t"></i>Primary</span><span class="tags"><span>default</span><span>focus</span></span></div>
+        <div class="body stack">
+          <div class="field-group"><label class="label">Email</label><input class="input" placeholder="you@zi.ui"><span class="label-helper">We'll never share your email.</span></div>
+          <div class="field-group"><label class="label">Password</label><input class="input" type="password" value="••••••••"></div>
+        </div></div>
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-warning"></i>States</span><span class="tags"><span>secondary</span><span>invalid</span><span>disabled</span></span></div>
+        <div class="body stack">
+          <div class="field-group"><label class="label">Workspace name</label><input class="input input--secondary" value="Acme, Inc."></div>
+          <div class="field-group"><label class="label" style="color:var(--danger)">Slug</label><input class="input" data-invalid value="acme inc" /><span class="label-helper" style="color:var(--danger)">Slugs can't contain spaces.</span></div>
+          <div class="field-group"><label class="label">Domain</label><input class="input" value="acme.com" disabled style="opacity:.5;pointer-events:none"></div>
+        </div></div>
+      <div class="demo"><div class="head"><span class="title"><i class="ph-duotone ph-magnifying-glass"></i>Input group</span><span class="tags"><span>with icon</span></span></div>
+        <div class="body stack">
+          <div class="input-group"><i class="ph-duotone ph-magnifying-glass"></i><input placeholder="Search components, tokens…" /><span class="mono" style="font-size:11px;color:var(--muted);padding:2px 6px;background:var(--color-default);border-radius:6px">⌘ K</span></div>
+          <div class="input-group"><i class="ph-duotone ph-credit-card"></i><input placeholder="Card number" value="4242 4242 4242 4242" /></div>
+        </div></div>
+    </div>
 </body>
 </html>
