@@ -118,13 +118,19 @@ index.html          文档站入口
 它自带独立的壳（`docs/assets/page.css` 加两个 JS 文件），这套壳别的地方
 用不到。人类浏览它来验收视觉语言、学习架构。
 
-**两个消费者都读根目录的同两个文件**：`assets/tokens.css` 和
-`assets/components.css`。**零重复副本**。改一次 `--accent`，skill 和
-文档站每一个页面都跟着变。
+**一份权威真相源，多份物理镜像**。权威版本 `tokens.css` +
+`components.css` 在仓库根目录的 `assets/` 里。文档站在 `docs/assets/`
+里维护自己的镜像，因为 GitHub Pages 只 serve `/docs` 子目录，运行时
+没法跨出去读仓库根。一个小脚本（`scripts/sync-docs-assets.sh`）负责
+把根目录的变更同步到 docs/。
 
-这种"一份真相源、多文件夹消费者"的切分，**正是这个仓库要演示的架构
-论点**：一份 DNA，多个下游。React 组件库可以是第三个文件夹，邮件模板
-系统可以是第四个——全都读同一份 `assets/tokens.css`。
+**这不是重复——这正是 React 组件库会用的同一种模式**：把真相源的
+当前值包进自己的 `dist/`，权威版本留在别处，构建时同步。文档站只是
+设计决策的**另一个下游消费者**。React 组件库会是第三个，邮件模板
+系统会是第四个。每一个都把 `tokens.css` 镜像进自己的部署单元。
+
+这个仓库要演示的架构论点是：**一份权威真相源，多份部署本地镜像——
+它们语义上完全等价，因为都机械地派生自同一个源头。**
 
 ---
 
@@ -137,9 +143,12 @@ zi-ui-skill/
 ├── README.md                   ← 英文版
 ├── README.zh-CN.md             ← 本文件
 │
-├── assets/                     ← 唯一真相源（skill + 文档站共用）
+├── assets/                     ← 权威真相源（skill 使用）
 │   ├── tokens.css              ←   DNA — 所有设计决策
 │   └── components.css          ←   tokens 投影为语义类（.button、.card...）
+│
+├── scripts/
+│   └── sync-docs-assets.sh     ← 把上面两份权威 CSS 同步到 docs/assets/
 │
 │   ─── Skill 本体 ───
 │
@@ -161,10 +170,12 @@ zi-ui-skill/
 │
 └── docs/                       ← 文档站：自包含，Pages 的 source 路径
     ├── index.html              ←   首页，带双语 Skill Introduction
-    ├── assets/                 ←   文档站专属壳（不是 skill 的一部分）
-    │   ├── page.css            ←     布局 + chrome 样式
-    │   ├── shell.js            ←     布局渲染器
-    │   └── nav2.js             ←     侧边栏导航
+    ├── assets/                 ←   自包含的部署单元
+    │   ├── tokens.css          ←     从根 assets/tokens.css 同步的镜像
+    │   ├── components.css      ←     从根 assets/components.css 同步的镜像
+    │   ├── page.css            ←     文档站专属：布局 + chrome
+    │   ├── shell.js            ←     文档站专属：布局渲染器
+    │   └── nav2.js             ←     文档站专属：侧边栏导航
     ├── foundations/            ←   token 视觉证明
     │   ├── color.html · motion.html · radius.html
     │   └── shadow.html · spacing.html · typography.html
@@ -177,9 +188,11 @@ zi-ui-skill/
 ```
 
 `docs/foundations/` 和 `docs/components/` 下 24 个页面都引用
-`../../assets/tokens.css` 和 `../../assets/components.css`——它们跨出
-`docs/` 到根目录读共享的真相源。`docs/assets/` 只装文档站自己的壳，
-skill 永远不碰它。
+`../assets/tokens.css` 和 `../assets/components.css`——它们读 docs 本地
+镜像的真相源副本。`docs/assets/` 里同时装着文档站专属的壳
+（page.css / shell.js / nav2.js）和从根目录同步过来的两个权威 CSS 镜像。
+编辑完根目录的 `assets/tokens.css` 或 `assets/components.css` 后，跑
+`scripts/sync-docs-assets.sh` 把变更传播到文档站。
 
 ### 阅读顺序（如果你想学架构）
 

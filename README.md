@@ -123,15 +123,24 @@ It has its own self-contained shell (`docs/assets/page.css` + two JS
 files) used nowhere else. Humans browse it to validate the visual
 language and learn the architecture.
 
-**Both consumers read from the same two files** at the repo root:
-`assets/tokens.css` and `assets/components.css`. Zero duplication. Change
-`--accent` once and every single page across both the skill and the docs
-site follows.
+**One authoritative truth source, multiple physical mirrors.** The
+authoritative `tokens.css` + `components.css` live at the repo root in
+`assets/`. The docs site keeps its own copies at `docs/assets/` because
+GitHub Pages serves only the `/docs` subtree and can't reach out to the
+repo root at runtime. A tiny script (`scripts/sync-docs-assets.sh`)
+copies root → docs whenever you change the authoritative files.
 
-This two-folder split **is the architectural thesis this repo demonstrates**:
-one truth source, many downstream consumers. A React component library
-could be a third folder. An email template system could be a fourth. All
-reading from the same `assets/tokens.css`.
+This is not duplication — it's the **exact same pattern a React component
+library would use**: wrap the truth source in the package's own `dist/`,
+keep the authoritative version elsewhere, sync on build. The docs site is
+just another downstream consumer of the design decisions encoded in
+`assets/tokens.css`. A React library would be the third consumer. An
+email template system the fourth. All of them mirror `tokens.css` into
+their own deployment unit.
+
+The architectural thesis this repo demonstrates: **one authoritative
+truth source, many deployment-local mirrors, all semantically equivalent
+because they derive mechanically from the same source.**
 
 ---
 
@@ -144,9 +153,12 @@ zi-ui-skill/
 ├── README.md                   ← this file (English)
 ├── README.zh-CN.md             ← Chinese version
 │
-├── assets/                     ← THE ONE TRUTH SOURCE (shared by skill + docs)
+├── assets/                     ← AUTHORITATIVE TRUTH SOURCE (used by skill)
 │   ├── tokens.css              ←   the DNA — every design decision
 │   └── components.css          ←   tokens → semantic classes (.button, .card, ...)
+│
+├── scripts/
+│   └── sync-docs-assets.sh     ← mirrors the two truth files into docs/assets/
 │
 │   ─── SKILL ───
 │
@@ -168,10 +180,12 @@ zi-ui-skill/
 │
 └── docs/                       ← DOCS SITE: self-contained, served by Pages
     ├── index.html              ←   homepage with bilingual Skill Introduction
-    ├── assets/                 ←   docs-only shell (not part of the skill)
-    │   ├── page.css            ←     layout + chrome styles
-    │   ├── shell.js            ←     layout renderer
-    │   └── nav2.js             ←     sidebar navigation
+    ├── assets/                 ←   self-contained deployment unit
+    │   ├── tokens.css          ←     SYNCED MIRROR of root assets/tokens.css
+    │   ├── components.css      ←     SYNCED MIRROR of root assets/components.css
+    │   ├── page.css            ←     docs-only: layout + chrome styles
+    │   ├── shell.js            ←     docs-only: layout renderer
+    │   └── nav2.js             ←     docs-only: sidebar navigation
     ├── foundations/            ←   token visual proofs
     │   ├── color.html · motion.html · radius.html
     │   └── shadow.html · spacing.html · typography.html
@@ -184,10 +198,12 @@ zi-ui-skill/
 ```
 
 All 24 pages under `docs/foundations/` and `docs/components/` reference
-`../../assets/tokens.css` and `../../assets/components.css` — they reach
-back out of `docs/` to consume the shared truth source. The `docs/assets/`
-folder contains only the docs-site shell and is never referenced by the
-skill.
+`../assets/tokens.css` and `../assets/components.css` — they consume the
+docs-local mirror of the truth source. The `docs/assets/` folder contains
+both the docs-site-specific shell (page.css/shell.js/nav2.js) and the
+synced mirrors of the authoritative CSS from the repo root. Run
+`scripts/sync-docs-assets.sh` whenever you edit `assets/tokens.css` or
+`assets/components.css` to propagate changes into the docs site.
 
 ### Reading order (if you want to learn the architecture)
 
