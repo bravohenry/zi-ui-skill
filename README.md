@@ -90,41 +90,104 @@ tokens, and you'll have your own Zi UI.
 
 ---
 
+## Repository roles: Skill vs Docs Site
+
+This repo holds **two things at once**, both pointing at the same truth source:
+
+```
+                  assets/  (the truth source)
+                 ├ tokens.css
+                 └ components.css
+                       │
+         ┌─────────────┴─────────────┐
+         ▼                           ▼
+    SKILL CONSUMER               DOCS CONSUMER
+    (for AI agents)             (for humans browsing)
+    ─────────────────           ──────────────────
+    SKILL.md                    index.html
+    examples/*  ← style anchor  foundations/*.html
+    references/*                components/*.html
+                                assets/page.css
+                                assets/shell.js
+                                assets/nav2.js
+```
+
+**The skill** is what `npx skills add` installs. It contains `SKILL.md`,
+the two CSS files in `assets/`, a handful of style-anchor pages in
+`examples/`, and judgment references in `references/`. That's what the
+AI reads.
+
+**The docs site** is what [bravohenry.github.io/zi-ui-skill](https://bravohenry.github.io/zi-ui-skill/)
+serves. It has a root `index.html` plus full component / foundation pages
+in `components/` and `foundations/` — meant for humans to browse, validate,
+and learn from.
+
+Both consumers read from the same `assets/tokens.css` + `assets/components.css`.
+The docs site additionally loads `assets/page.css` / `shell.js` / `nav2.js`
+as its UI shell — these are docs-only and the AI never touches them.
+
+This two-sided layout **is the whole point of the architecture this repo
+demonstrates**: one truth source, many downstream consumers. A React
+component library would be a third consumer. An email template system
+would be a fourth. They all read from the same `tokens.css`.
+
+So yes, you'll see `examples/button.html` and `components/button.html`
+side by side — not duplication, but two *cross-sections* of the same
+system: one minimal (for AI to learn rhythm), one exhaustive (for humans
+to browse variants).
+
+---
+
 ## Repository tour
 
 ```
 zi-ui-skill/
-├── SKILL.md              ← the spec: activation rules, hard rules, scenario → pattern map
-├── README.md             ← this file
-├── assets/
-│   ├── tokens.css        ← THE DNA: colors, radius, spacing, shadows, motion
-│   └── components.css    ← tokens projected into semantic classes (.button, .card, ...)
-├── examples/
-│   ├── index.html        ← full system overview
-│   ├── button.html       ← style anchor for buttons
-│   ├── card.html
-│   ├── chip.html
-│   ├── color.html
-│   ├── input.html
-│   ├── table.html
-│   ├── typography.html
-│   └── settings.tsx      ← React wrapper sample (on-demand, 3+ reuse rule)
-└── references/
-    ├── component-api.md       ← full class inventory
-    ├── color-guide.md         ← when to use accent vs success vs warning vs danger
-    ├── token-dimensions.md    ← radius / spacing / shadow / motion scales
-    ├── scenario-patterns.md   ← dashboard? form? empty state? → canonical compositions
-    ├── do-dont.md             ← anti-patterns with ✅ / ❌ examples
-    └── react-adapters.md      ← how to build thin wrappers when the project is React
+│
+├── SKILL.md                    ← skill spec: activation, hard rules, scenario map
+├── README.md                   ← this file (English)
+├── README.zh-CN.md             ← Chinese version
+│
+├── assets/                     ← THE SHARED TRUTH SOURCE
+│   ├── tokens.css              ←   the DNA — every design decision
+│   ├── components.css          ←   tokens → semantic classes (.button, .card, ...)
+│   ├── page.css                ←   docs-site shell styles (docs-only)
+│   ├── shell.js                ←   docs-site layout renderer (docs-only)
+│   └── nav2.js                 ←   docs-site navigation (docs-only)
+│
+├── examples/                   ← SKILL: style anchors (AI learns rhythm from these)
+│   ├── button.html             ←   minimal compositions, one per primitive
+│   ├── card.html · chip.html · color.html
+│   ├── input.html · table.html · typography.html
+│   ├── index.html              ←   (v2 consolidated anchor, legacy)
+│   └── settings.tsx            ←   React wrapper sample (3+ reuse rule)
+│
+├── references/                 ← SKILL: judgment externalized (AI loads on demand)
+│   ├── component-api.md        ←   full class inventory
+│   ├── color-guide.md          ←   accent vs success vs warning vs danger
+│   ├── token-dimensions.md     ←   radius / spacing / shadow / motion scales
+│   ├── scenario-patterns.md    ←   dashboard? form? empty state? → patterns
+│   ├── do-dont.md              ←   ✅ / ❌ anti-pattern pairs
+│   └── react-adapters.md       ←   thin wrapper recipes for React projects
+│
+├── index.html                  ← DOCS SITE: GitHub Pages home
+├── foundations/                ← DOCS SITE: token visual proofs (for humans)
+│   ├── color.html · motion.html · radius.html
+│   └── shadow.html · spacing.html · typography.html
+└── components/                 ← DOCS SITE: exhaustive component pages (for humans)
+    ├── alert.html · avatar.html · badge.html · button.html
+    ├── card.html · checkbox.html · chip.html · input.html
+    ├── menu.html · modal.html · progress.html · radio.html
+    ├── slider.html · switch.html · table.html · tabs.html
+    └── textarea.html · tooltip.html
 ```
 
 ### Reading order (if you want to learn the architecture)
 
-1. **`assets/tokens.css`** — 5 minutes. See the complete truth source.
-2. **`assets/components.css`** — 10 minutes. See how tokens become classes.
-3. **`examples/index.html`** — open in browser. Feel the system.
+1. **Visit [the docs site](https://bravohenry.github.io/zi-ui-skill/)** — 5 minutes. Feel the system as a user.
+2. **`assets/tokens.css`** — 5 minutes. See the complete truth source.
+3. **`assets/components.css`** — 10 minutes. See how tokens become classes.
 4. **`SKILL.md`** — 15 minutes. Read the rules the AI follows.
-5. **`references/`** — skim. These are loaded on demand when composing UI.
+5. **`examples/` and `references/`** — skim. These are what the AI loads on demand.
 
 One hour and you'll understand the whole thing.
 

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zi UI v3 — Spacing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<link rel="stylesheet" href="../assets/tokens.css" />
+<link rel="stylesheet" href="../assets/page.css" />
+<link rel="stylesheet" href="../assets/components.css" />
+<script src="../assets/shell.js"></script>
+</head>
+<body>
+<script>renderLayout({"key":"spacing","title":"Spacing","depth":1,"section":"Foundation","label":"Foundation · 04","desc":"A 4px base unit drives all gaps and paddings. Tailwind's <span class=\"mono\">p-*</span> scale multiplies <span class=\"mono\">--spacing</span>.","content":"<div class=\"space-list\" id=\"space-list\"></div>","prev":{"href":"foundations/radius.html","title":"Radius"},"next":{"href":"foundations/shadow.html","title":"Elevation"}});</script>
+<script>
+
+    const spacing = [['0','0px'],['0.5','2px'],['1','4px'],['1.5','6px'],['2','8px'],['3','12px'],['4','16px'],['5','20px'],['6','24px'],['8','32px'],['10','40px'],['12','48px'],['16','64px']];
+    document.getElementById('space-list').innerHTML = spacing.map(s =>
+      '<div class="space-row"><div class="label mono">' + s[0] + '</div><div style="position:relative"><div class="bar" style="width:' + s[1] + ';max-width:100%"></div></div><div class="val">' + s[1] + '</div></div>').join('');
+  
+</script>
+</body>
+</html>

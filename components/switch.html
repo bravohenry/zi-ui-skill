@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zi UI v3 — Switch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+<link rel="stylesheet" href="../assets/tokens.css" />
+<link rel="stylesheet" href="../assets/page.css" />
+<link rel="stylesheet" href="../assets/components.css" />
+<script src="../assets/shell.js"></script>
+</head>
+<body>
+<script>renderLayout({"key":"switch","title":"Switch","depth":1,"section":"Component","label":"Component · 04","desc":"Switch thumbs animate with the fluid easing curve. Three sizes share the same visual weight.","content":"\n    <div class=\"demo-grid\">\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-toggle-right\"></i>Sizes</span><span class=\"tags\"><span>sm · md · lg</span></span></div>\n        <div class=\"body stack\">\n          <label class=\"switch switch--sm\" data-selected=\"true\"><input type=\"checkbox\" checked><span class=\"switch__control\"><span class=\"switch__thumb\"></span></span><span class=\"switch__label\">Enable autosave</span></label>\n          <label class=\"switch\"><input type=\"checkbox\"><span class=\"switch__control\"><span class=\"switch__thumb\"></span></span><span class=\"switch__label\">Share anonymous telemetry</span></label>\n          <label class=\"switch switch--lg\" data-selected=\"true\"><input type=\"checkbox\" checked><span class=\"switch__control\"><span class=\"switch__thumb\"></span></span><span class=\"switch__label\">Use system theme</span></label>\n        </div></div>\n      <div class=\"demo\"><div class=\"head\"><span class=\"title\"><i class=\"ph-duotone ph-cursor-click\"></i>Interactive</span><span class=\"tags\"><span>click to toggle</span></span></div>\n        <div class=\"body stack\" id=\"switch-live\">\n          <label class=\"switch\"><input type=\"checkbox\"><span class=\"switch__control\"><span class=\"switch__thumb\"></span></span><span class=\"switch__label\">Notifications</span></label>\n          <label class=\"switch\" data-selected=\"true\"><input type=\"checkbox\" checked><span class=\"switch__control\"><span class=\"switch__thumb\"></span></span><span class=\"switch__label\">Sync across devices</span></label>\n        </div></div>\n    </div>\n  ","prev":{"href":"components/textarea.html","title":"Textarea"},"next":{"href":"components/checkbox.html","title":"Checkbox"}});</script>
+<script>
+
+    document.querySelectorAll('#switch-live .switch').forEach(el => {
+      el.addEventListener('click', e => {
+        if (e.target.tagName === 'INPUT') return;
+        e.preventDefault();
+        const inp = el.querySelector('input');
+        inp.checked = !inp.checked;
+        el.setAttribute('data-selected', inp.checked ? 'true' : 'false');
+      });
+    });
+  
+</script>
+</body>
+</html>
