@@ -59,6 +59,6 @@ window.renderLayout = function ({ key, title, depth = 0, section = "Component", 
 
   // Load nav + theme bootstrap
   const s = document.createElement("script");
-  s.src = base + "ref/nav2.js";
+  s.src = base + "assets/nav2.js";
   document.body.appendChild(s);
 };
