@@ -90,6 +90,51 @@ tokens, and you'll have your own Zi UI.
 
 ---
 
+## Token architecture: two layers, three axes
+
+**Two layers.** Every token belongs to exactly one:
+
+```
+L1  --palette-*    physical values (--palette-blue-500, --palette-gray-100, ...)
+                   ONLY the semantic layer consumes these. Components never.
+
+L2  --color-*      semantic meaning (--color-accent, --color-foreground, ...)
+    --radius-*     (also --space-*, --shadow-*, --ease-*)
+                   Components, agents, every downstream consumer reads here.
+```
+
+**Three orthogonal theming axes** on `<html>`:
+
+```
+data-brand="zi"              data-theme="light"          data-contrast="high"
+(default, or custom brand)   (or "dark")                 (opt-in WCAG AAA)
+
+<html data-brand="zi" data-theme="dark" data-contrast="high">
+```
+
+Axes compose freely. Dark mode and high-contrast work with any brand; a
+new brand only needs to redefine semantic colors, inheriting everything
+else.
+
+**Adding a new brand** = appending one block to `assets/tokens.css`:
+
+```css
+[data-brand="yourbrand"] {
+  --color-accent:       var(--palette-green-500);
+  --color-accent-hover: var(--palette-green-600);
+  /* ...other semantic overrides */
+}
+```
+
+This is the architecture GitHub Primer, Adobe Spectrum, and Salesforce
+SLDS have used for years — now packaged as a ~400-line CSS file you can
+fork in an afternoon.
+
+See [`CHANGELOG.md`](./CHANGELOG.md) for the 0.1.0 → 0.2.0 migration
+(spoiler: no code changes required — 24 legacy aliases preserved).
+
+---
+
 ## Repository roles: Skill vs Docs Site
 
 The repo is split cleanly into **two folders with zero overlap**, both
@@ -152,6 +197,7 @@ zi-ui-skill/
 ├── SKILL.md                    ← skill spec: activation, hard rules, scenario map
 ├── README.md                   ← this file (English)
 ├── README.zh-CN.md             ← Chinese version
+├── CHANGELOG.md                ← version history (semver), migration guides
 │
 ├── assets/                     ← AUTHORITATIVE TRUTH SOURCE (used by skill)
 │   ├── tokens.css              ←   the DNA — every design decision

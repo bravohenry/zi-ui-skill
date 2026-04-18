@@ -1,8 +1,11 @@
 ---
 name: zi-ui
+version: 0.2.0
 description: |
-  Zi UI is a flat, token-driven CSS design system with a calm, editorial
-  aesthetic. Neutral palette, low chroma, 500 max font-weight, Geist typeface.
+  Zi UI is a token-driven CSS design system with a calm, editorial
+  aesthetic. Two-layer tokens (primitive → semantic), three orthogonal
+  theming axes (brand × light/dark × contrast). Neutral palette, low
+  chroma, 500 max font-weight, Geist typeface.
 
   Activate this skill when the user asks to build, style, mock up, or prototype
   UI in the Zi UI visual language — dashboards, internal tools, documentation
@@ -66,15 +69,53 @@ Skip any the user has already answered.
 4. **Existing visual language** — is there a codebase with its own tokens/components already? If yes, confirm Zi UI replaces it or layers alongside (usually: replace).
 5. **Density** — standard (36px controls, the default) or compact (32px)?
 6. **Scope** — one page, a flow, a whole app? Affects whether wrappers are worth generating.
-7. **Brand accent** — keep the default blue `--accent`, or override to a project brand color? If overriding, do it **once** in a `brand.css` after tokens.css.
+7. **Brand accent** — keep the default blue `--color-accent`, or define a new brand? To add a brand, append a `[data-brand="yourname"]` block to `assets/tokens.css` that remaps `--color-accent` + related semantics; apply with `<html data-brand="yourname">`. See the template at the bottom of `tokens.css`.
+8. **High-contrast mode** — if the target needs WCAG AAA (gov / medical / a11y-regulated), apply `<html data-contrast="high">`. Orthogonal to brand and theme.
 
 If any answer would change the output significantly, ask before building.
+
+## Token architecture
+
+Two layers. Three orthogonal axes. Agents MUST follow these rules.
+
+**Layers — naming distinguishes them:**
+
+| Layer     | Prefix           | Who uses it                                         |
+|-----------|------------------|-----------------------------------------------------|
+| Primitive | `--palette-*`    | **Only the semantic layer below**. Components NEVER. |
+| Semantic  | `--color-*`, `--radius-*`, `--space-*`, `--shadow-*`, `--ease-*` | Components, AI, every consumer. |
+
+**Iron rule**: when writing a component, if you type `--palette-` you are
+doing it wrong. Use `--color-accent`, never `--palette-blue-500`.
+
+Why: primitive values change (rebrand, accessibility audit, dark-mode
+tuning). Semantic names are the API contract; primitives are the
+implementation. Agents should only ever consume the API.
+
+**Legacy aliases** (`--accent`, `--foreground`, `--radius`, etc.) are kept
+for backward compatibility with v0.1.0 code. New code should prefer the
+`--color-accent` / `--color-foreground` / `--radius-lg` forms.
+
+**Orthogonal theming axes — combine freely on `<html>`:**
+
+| Attribute                | Values                    | Effect                       |
+|--------------------------|---------------------------|------------------------------|
+| `data-brand="..."`       | `zi` (default), custom    | Swaps the semantic color map |
+| `data-theme="..."`       | `light` (default), `dark` | Inverts surface/text mapping |
+| `data-contrast="high"`   | opt-in                    | WCAG AAA-compliant overrides |
+
+These axes are independent. `<html data-brand="example" data-theme="dark" data-contrast="high">` is valid.
+
+Adding a new brand = adding a new `[data-brand="yourbrand"]` block in
+`assets/tokens.css` that remaps `--color-*`. Radius, spacing, shadows,
+motion are inherited from the default unless overridden.
 
 ## Hard rules
 
 1. **Link both CSS files in order.** `tokens.css` first, `components.css` second. Never inline-copy their contents; never rewrite tokens.
 2. **Only use documented classes.** The closed set lives in `references/component-api.md`. If a need doesn't map to an existing class, rethink the layout before inventing one.
-3. **Colors via CSS variables only.** `var(--accent)`, `var(--foreground)`, etc. Never hex / rgb / named colors.
+3. **Colors via semantic CSS variables only.** Prefer `var(--color-accent)` / `var(--color-foreground)`. Legacy `var(--accent)` / `var(--foreground)` still work but are kept only for backward compatibility. Never hex / rgb / named colors.
+3b. **Never reference `--palette-*` directly.** The palette layer is implementation. If you write `var(--palette-blue-500)` in a component, you are breaking the architecture — use `var(--color-accent)` instead.
 4. **Font-weight cap: 500.** No 600/700/800/900. Hierarchy comes from size + color contrast.
 5. **Font family: Geist.** Already set by components; don't override.
 6. **No pure `#000` / `#fff`.** Use `--foreground` / `--background` / `--surface`.
@@ -97,8 +138,8 @@ If any answer would change the output significantly, ask before building.
   <style>
     body {
       margin: 0;
-      background: var(--background);
-      color: var(--foreground);
+      background: var(--color-background);
+      color: var(--color-foreground);
       font: 400 14px/1.5 "Geist", sans-serif;
     }
   </style>
@@ -135,7 +176,11 @@ Full recipes in `references/react-adapters.md`. Sample page in `examples/setting
 
 - [ ] `tokens.css` and `components.css` are both linked in the target project
 - [ ] No hard-coded colors, shadows, or radii anywhere
+- [ ] **Zero `--palette-*` references in components** (grep the codebase — must be empty)
+- [ ] New code uses `--color-*` / `--radius-*` / `--shadow-*` semantic names (not legacy `--accent` / `--foreground`)
 - [ ] `data-theme="dark"` toggles cleanly (test it)
+- [ ] If the target needs multi-brand: a `[data-brand="yourname"]` block is appended to `tokens.css`, not overrides on components
+- [ ] If the target needs a11y: `data-contrast="high"` renders without regressions
 - [ ] No `font-weight` above 500
 - [ ] No Tailwind, MUI, Chakra, Bootstrap, or other design systems pulled in alongside
 - [ ] One primary action per screen

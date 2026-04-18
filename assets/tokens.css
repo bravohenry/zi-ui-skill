@@ -1,161 +1,375 @@
-/* Zi UI v3 tokens — light + dark, lifted from ziui/packages/styles/themes/default/variables.css */
-:root,
-.light,
-[data-theme="light"] {
-  color-scheme: light;
-  --white: oklch(100% 0 0);
-  --black: oklch(0% 0 0);
-  --snow: oklch(0.9911 0 0);
-  --eclipse: oklch(0.2103 0.0059 285.89);
+/* =============================================================================
+ * Zi UI · design tokens
+ * -----------------------------------------------------------------------------
+ * Two layers, enforced by naming:
+ *
+ *   L1 ─ PRIMITIVE  prefix: --palette-*  (physical values, brand-neutral)
+ *                   NEVER reference these in components. They are the
+ *                   implementation of the semantic layer. Change them to
+ *                   rebrand — do not change them to style a component.
+ *
+ *   L2 ─ SEMANTIC   prefix: --color-* / --space-* / --radius-* / --shadow-* /
+ *                   --ease-* / --z-*  (meaning & intent, brand-specific)
+ *                   Components consume ONLY these. Safe to rename a palette
+ *                   value (L1) without touching a single component; safe to
+ *                   swap an entire brand by overriding only the semantic map.
+ *
+ * Orthogonal axes:
+ *   [data-brand="..."]   brand override (default: zi)
+ *   [data-theme="..."]   light / dark (default: light)
+ *   [data-contrast="high"]  optional a11y high-contrast overrides
+ *
+ * Legacy aliases (e.g. --accent, --foreground) are kept at the bottom of the
+ * :root block for backward compatibility. New code should prefer the
+ * --color-* / --space-* / --radius-* forms.
+ *
+ * Browser fallback: OKLCH is not supported in Safari < 15.4 or Chrome < 111.
+ * Each L1 palette value ships with a hex fallback via @supports.
+ * =============================================================================
+ */
 
-  --spacing: 0.25rem;
-  --border-width: 1px;
-  --field-border-width: 0px;
-  --disabled-opacity: 0.5;
-  --ring-offset-width: 2px;
-  --cursor-interactive: pointer;
-  --cursor-disabled: not-allowed;
-  --radius: 0.5rem;
-  --field-radius: calc(var(--radius) * 1.5);
+/* -----------------------------------------------------------------------------
+ * L1 · PRIMITIVE palette — physical values, brand-neutral
+ * Components MUST NOT reference these directly. Use --color-* instead.
+ * -----------------------------------------------------------------------------
+ */
+:root {
+  /* Neutral scale */
+  --palette-white:    oklch(100%    0     0);
+  --palette-black:    oklch(0%      0     0);
+  --palette-snow:     oklch(0.9911  0     0);
+  --palette-gray-50:  oklch(0.9702  0     0);
+  --palette-gray-100: oklch(0.9524  0.0013 286.37);
+  --palette-gray-200: oklch(0.9373  0.0013 286.37);
+  --palette-gray-300: oklch(87.1%   0.006 286.286);
+  --palette-gray-400: oklch(70.5%   0.015 286.067);
+  --palette-gray-500: oklch(0.5517  0.0138 285.94);
+  --palette-gray-600: oklch(0.3964  0.01  285.93);
+  --palette-gray-700: oklch(27.4%   0.006 286.033);
+  --palette-gray-800: oklch(0.2721  0.0024 247.91);
+  --palette-gray-850: oklch(0.257   0.0037 286.14);
+  --palette-gray-900: oklch(0.2103  0.0059 285.89);
+  --palette-gray-950: oklch(12%     0.005 285.823);
 
-  --background: oklch(0.9702 0 0);
-  --foreground: var(--eclipse);
+  /* Brand scales */
+  --palette-blue-400:  oklch(0.6929 0.175  253.83);
+  --palette-blue-500:  oklch(0.6204 0.195  253.83);
+  --palette-blue-600:  oklch(0.5480 0.210  253.83);
 
-  --surface: var(--white);
-  --surface-foreground: var(--foreground);
-  --surface-secondary: oklch(0.9524 0.0013 286.37);
-  --surface-secondary-foreground: var(--foreground);
-  --surface-tertiary: oklch(0.9373 0.0013 286.37);
-  --surface-tertiary-foreground: var(--foreground);
+  --palette-green-400: oklch(0.7849 0.180  150.81);
+  --palette-green-500: oklch(0.7329 0.1935 150.81);
+  --palette-green-600: oklch(0.6529 0.220  150.81);
 
-  --overlay: var(--white);
-  --overlay-foreground: var(--foreground);
+  --palette-amber-400: oklch(0.8203 0.1388 76.34);
+  --palette-amber-500: oklch(0.7819 0.1585 72.33);
+  --palette-amber-600: oklch(0.7100 0.178  72.33);
 
-  --muted: oklch(0.5517 0.0138 285.94);
-  --scrollbar: oklch(87.1% 0.006 286.286);
+  --palette-red-400:   oklch(0.7100 0.210  25.74);
+  --palette-red-500:   oklch(0.6532 0.2328 25.74);
+  --palette-red-600:   oklch(0.5940 0.1967 24.63);
 
-  --default: oklch(94% 0.001 286.375);
-  --default-foreground: var(--eclipse);
-
-  --accent: oklch(0.6204 0.195 253.83);
-  --accent-foreground: var(--snow);
-
-  --field-background: var(--white);
-  --field-foreground: oklch(0.2103 0.0059 285.89);
-  --field-placeholder: var(--muted);
-  --field-border: transparent;
-
-  --success: oklch(0.7329 0.1935 150.81);
-  --success-foreground: var(--eclipse);
-  --warning: oklch(0.7819 0.1585 72.33);
-  --warning-foreground: var(--eclipse);
-  --danger: oklch(0.6532 0.2328 25.74);
-  --danger-foreground: var(--snow);
-
-  --segment: var(--white);
-  --segment-foreground: var(--eclipse);
-
-  --border: oklch(90% 0.004 286.32);
-  --separator: oklch(92% 0.004 286.32);
-  --focus: var(--accent);
-  --link: var(--foreground);
-  --backdrop: rgba(0, 0, 0, 0.5);
-
-  --surface-shadow:
-    0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
-    0 0 1px 0 rgba(0, 0, 0, 0.06);
-  --overlay-shadow:
-    0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 -6px 12px 0 rgba(0, 0, 0, 0.03),
-    0 14px 28px 0 rgba(0, 0, 0, 0.08);
-  --field-shadow:
-    0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
-    0 0 1px 0 rgba(0, 0, 0, 0.06);
-
-  /* calculated tokens */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-surface-secondary: var(--surface-secondary);
-  --color-surface-tertiary: var(--surface-tertiary);
-  --color-overlay: var(--overlay);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
-  --color-accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
-  --color-accent-soft-foreground: var(--accent);
-  --color-default: var(--default);
-  --color-default-foreground: var(--default-foreground);
-  --color-default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-  --color-border: var(--border);
-  --color-separator: var(--separator);
-  --color-focus: var(--focus);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-success-soft: color-mix(in oklab, var(--success) 15%, transparent);
-  --color-success-soft-foreground: var(--success);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-  --color-warning-soft: color-mix(in oklab, var(--warning) 15%, transparent);
-  --color-warning-soft-foreground: var(--warning);
-  --color-danger: var(--danger);
-  --color-danger-foreground: var(--danger-foreground);
-  --color-danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
-  --color-danger-soft-foreground: var(--danger);
-  --color-field: var(--field-background);
-  --color-field-foreground: var(--field-foreground);
-  --color-field-placeholder: var(--field-placeholder);
-  --color-field-border: var(--field-border);
-  --color-field-hover: color-mix(in oklab, var(--field-background) 90%, var(--field-foreground) 2%);
-  --color-field-focus: var(--field-background);
-  --color-field-border-focus: color-mix(in oklab, var(--field-border) 74%, var(--field-foreground) 22%);
-
-  --radius-xs: calc(var(--radius) * 0.25);
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: calc(var(--radius) * 0.75);
-  --radius-lg: calc(var(--radius) * 1);
-  --radius-xl: calc(var(--radius) * 1.5);
-  --radius-2xl: calc(var(--radius) * 2);
-  --radius-3xl: calc(var(--radius) * 3);
-  --radius-4xl: calc(var(--radius) * 4);
-  --radius-field: var(--field-radius);
-
-  --shadow-surface: var(--surface-shadow);
-  --shadow-overlay: var(--overlay-shadow);
-  --shadow-field: var(--field-shadow);
-
-  --ease-smooth: ease;
-  --ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* Dimension primitives */
+  --palette-radius-base:  0.5rem;     /* L1 radius unit */
+  --palette-spacing-base: 0.25rem;    /* L1 spacing unit (4px grid) */
+  --palette-border-width: 1px;
+  --palette-ring-offset:  2px;
 }
 
+/* OKLCH fallback for older browsers (Safari < 15.4, Chrome < 111).
+ * If the browser can't parse oklch(), swap in nearest hex equivalents.
+ */
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    --palette-white:    #ffffff;
+    --palette-black:    #000000;
+    --palette-snow:     #fbfbfb;
+    --palette-gray-50:  #f2f2f2;
+    --palette-gray-100: #ececee;
+    --palette-gray-200: #e5e5e8;
+    --palette-gray-300: #d6d6d9;
+    --palette-gray-400: #a5a5ab;
+    --palette-gray-500: #7a7a82;
+    --palette-gray-600: #54545a;
+    --palette-gray-700: #3c3c42;
+    --palette-gray-800: #2e3238;
+    --palette-gray-850: #2b2b30;
+    --palette-gray-900: #1f1f23;
+    --palette-gray-950: #101013;
+    --palette-blue-400:  #5a9fff;
+    --palette-blue-500:  #2f7ff0;
+    --palette-blue-600:  #2565c4;
+    --palette-green-400: #46c474;
+    --palette-green-500: #2fa65a;
+    --palette-green-600: #228446;
+    --palette-amber-400: #f0b747;
+    --palette-amber-500: #dc9a2b;
+    --palette-amber-600: #b27c1f;
+    --palette-red-400:   #ef6759;
+    --palette-red-500:   #d94132;
+    --palette-red-600:   #c2322a;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * L2 · SEMANTIC tokens — what components consume
+ * These names describe INTENT, not physical values. Swap the mapping below
+ * to rebrand without touching a single component.
+ * -----------------------------------------------------------------------------
+ */
+
+/* Default brand (zi) · light theme · standard contrast */
+:root,
+.light,
+[data-theme="light"],
+[data-brand="zi"] {
+  color-scheme: light;
+
+  /* ── Surface & text ── */
+  --color-background:            var(--palette-gray-50);
+  --color-foreground:            var(--palette-gray-900);
+  --color-surface:               var(--palette-white);
+  --color-surface-foreground:    var(--color-foreground);
+  --color-surface-secondary:     var(--palette-gray-100);
+  --color-surface-secondary-foreground: var(--color-foreground);
+  --color-surface-tertiary:      var(--palette-gray-200);
+  --color-surface-tertiary-foreground:  var(--color-foreground);
+  --color-overlay:               var(--palette-white);
+  --color-overlay-foreground:    var(--color-foreground);
+  --color-muted:                 var(--palette-gray-500);
+  --color-scrollbar:             var(--palette-gray-300);
+  --color-border:                oklch(90% 0.004 286.32);
+  --color-separator:             oklch(92% 0.004 286.32);
+  --color-link:                  var(--color-foreground);
+  --color-backdrop:              rgba(0, 0, 0, 0.5);
+
+  /* ── Intent: default (neutral emphasis) ── */
+  --color-default:               oklch(94% 0.001 286.375);
+  --color-default-foreground:    var(--palette-gray-900);
+  --color-default-hover:         color-mix(in oklab, var(--color-default) 96%, var(--color-default-foreground) 4%);
+
+  /* ── Intent: accent (primary brand action) ── */
+  --color-accent:                var(--palette-blue-500);
+  --color-accent-foreground:     var(--palette-snow);
+  --color-accent-hover:          var(--palette-blue-600);
+  --color-accent-soft:           color-mix(in oklab, var(--color-accent) 15%, transparent);
+  --color-accent-soft-foreground: var(--color-accent);
+  --color-focus:                 var(--color-accent);
+
+  /* ── Intent: success / warning / danger (status signals) ── */
+  --color-success:               var(--palette-green-500);
+  --color-success-foreground:    var(--palette-gray-900);
+  --color-success-soft:          color-mix(in oklab, var(--color-success) 15%, transparent);
+  --color-success-soft-foreground: var(--color-success);
+
+  --color-warning:               var(--palette-amber-500);
+  --color-warning-foreground:    var(--palette-gray-900);
+  --color-warning-soft:          color-mix(in oklab, var(--color-warning) 15%, transparent);
+  --color-warning-soft-foreground: var(--color-warning);
+
+  --color-danger:                var(--palette-red-500);
+  --color-danger-foreground:     var(--palette-snow);
+  --color-danger-soft:           color-mix(in oklab, var(--color-danger) 15%, transparent);
+  --color-danger-soft-foreground: var(--color-danger);
+
+  /* ── Fields (inputs, textareas) ── */
+  --color-field:                 var(--palette-white);
+  --color-field-foreground:      var(--palette-gray-900);
+  --color-field-placeholder:     var(--color-muted);
+  --color-field-border:          transparent;
+  --color-field-border-focus:    color-mix(in oklab, var(--color-field-border) 74%, var(--color-field-foreground) 22%);
+  --color-field-hover:           color-mix(in oklab, var(--color-field) 90%, var(--color-field-foreground) 2%);
+  --color-field-focus:           var(--color-field);
+
+  /* ── Segments (pill toggles) ── */
+  --color-segment:               var(--palette-white);
+  --color-segment-foreground:    var(--palette-gray-900);
+
+  /* ── Radius scale (from L1 unit) ── */
+  --radius-base:                 var(--palette-radius-base);
+  --radius-xs:                   calc(var(--radius-base) * 0.25);
+  --radius-sm:                   calc(var(--radius-base) * 0.5);
+  --radius-md:                   calc(var(--radius-base) * 0.75);
+  --radius-lg:                   calc(var(--radius-base) * 1);
+  --radius-xl:                   calc(var(--radius-base) * 1.5);
+  --radius-2xl:                  calc(var(--radius-base) * 2);
+  --radius-3xl:                  calc(var(--radius-base) * 3);
+  --radius-4xl:                  calc(var(--radius-base) * 4);
+  --radius-field:                calc(var(--radius-base) * 1.5);
+
+  /* ── Spacing unit (4px grid) ── */
+  --space-base:                  var(--palette-spacing-base);
+
+  /* ── Borders ── */
+  --border-width:                var(--palette-border-width);
+  --field-border-width:          0px;
+  --ring-offset-width:           var(--palette-ring-offset);
+
+  /* ── Shadows ── */
+  --shadow-surface:
+    0 2px 4px 0 rgba(0, 0, 0, 0.04),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06),
+    0 0 1px 0 rgba(0, 0, 0, 0.06);
+  --shadow-overlay:
+    0 2px 8px 0 rgba(0, 0, 0, 0.06),
+    0 -6px 12px 0 rgba(0, 0, 0, 0.03),
+    0 14px 28px 0 rgba(0, 0, 0, 0.08);
+  --shadow-field:
+    0 2px 4px 0 rgba(0, 0, 0, 0.04),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06),
+    0 0 1px 0 rgba(0, 0, 0, 0.06);
+
+  /* ── Motion ── */
+  --ease-smooth:     ease;
+  --ease-out-fluid:  cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-quart:  cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  /* ── Misc ── */
+  --disabled-opacity:      0.5;
+  --cursor-interactive:    pointer;
+  --cursor-disabled:       not-allowed;
+
+  /* ── Legacy aliases — DO NOT use in new code ──
+   * Kept so existing HTML/CSS from v0.1.0 keeps rendering unchanged.
+   * Prefer the L2 --color-* / --radius-* / --shadow-* forms above.
+   */
+  --white:        var(--palette-white);
+  --black:        var(--palette-black);
+  --snow:         var(--palette-snow);
+  --eclipse:      var(--palette-gray-900);
+  --background:   var(--color-background);
+  --foreground:   var(--color-foreground);
+  --surface:      var(--color-surface);
+  --surface-foreground:    var(--color-surface-foreground);
+  --surface-secondary:     var(--color-surface-secondary);
+  --surface-secondary-foreground: var(--color-surface-secondary-foreground);
+  --surface-tertiary:      var(--color-surface-tertiary);
+  --surface-tertiary-foreground:  var(--color-surface-tertiary-foreground);
+  --overlay:      var(--color-overlay);
+  --overlay-foreground:    var(--color-overlay-foreground);
+  --muted:        var(--color-muted);
+  --scrollbar:    var(--color-scrollbar);
+  --default:      var(--color-default);
+  --default-foreground:    var(--color-default-foreground);
+  --accent:       var(--color-accent);
+  --accent-foreground:     var(--color-accent-foreground);
+  --success:      var(--color-success);
+  --success-foreground:    var(--color-success-foreground);
+  --warning:      var(--color-warning);
+  --warning-foreground:    var(--color-warning-foreground);
+  --danger:       var(--color-danger);
+  --danger-foreground:     var(--color-danger-foreground);
+  --segment:      var(--color-segment);
+  --segment-foreground:    var(--color-segment-foreground);
+  --border:       var(--color-border);
+  --separator:    var(--color-separator);
+  --focus:        var(--color-focus);
+  --link:         var(--color-link);
+  --backdrop:     var(--color-backdrop);
+  --field-background:      var(--color-field);
+  --field-foreground:      var(--color-field-foreground);
+  --field-placeholder:     var(--color-field-placeholder);
+  --field-border:          var(--color-field-border);
+  --surface-shadow:        var(--shadow-surface);
+  --overlay-shadow:        var(--shadow-overlay);
+  --field-shadow:          var(--shadow-field);
+  --radius:       var(--radius-base);
+  --field-radius: var(--radius-field);
+  --spacing:      var(--space-base);
+}
+
+/* -----------------------------------------------------------------------------
+ * DARK theme — overrides semantic map
+ * Works with any [data-brand]. Orthogonal to brand.
+ * -----------------------------------------------------------------------------
+ */
 .dark,
 [data-theme="dark"] {
   color-scheme: dark;
-  --background: oklch(12% 0.005 285.823);
-  --foreground: var(--snow);
-  --surface: oklch(0.2103 0.0059 285.89);
-  --surface-foreground: var(--foreground);
-  --surface-secondary: oklch(0.257 0.0037 286.14);
-  --surface-tertiary: oklch(0.2721 0.0024 247.91);
-  --overlay: oklch(0.2103 0.0059 285.89);
-  --overlay-foreground: var(--foreground);
-  --muted: oklch(70.5% 0.015 286.067);
-  --scrollbar: oklch(70.5% 0.015 286.067);
-  --default: oklch(27.4% 0.006 286.033);
-  --default-foreground: var(--snow);
-  --field-background: oklch(0.2103 0.0059 285.89);
-  --field-foreground: var(--foreground);
-  --warning: oklch(0.8203 0.1388 76.34);
-  --warning-foreground: var(--eclipse);
-  --danger: oklch(0.594 0.1967 24.63);
-  --danger-foreground: var(--snow);
-  --segment: oklch(0.3964 0.01 285.93);
-  --segment-foreground: var(--foreground);
-  --border: oklch(28% 0.006 286.033);
-  --separator: oklch(25% 0.006 286.033);
-  --backdrop: rgba(0, 0, 0, 0.6);
-  --surface-shadow: 0 0 0 0 transparent inset;
-  --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
-  --field-shadow: 0 0 0 0 transparent inset;
+
+  --color-background:            var(--palette-gray-950);
+  --color-foreground:            var(--palette-snow);
+  --color-surface:               var(--palette-gray-900);
+  --color-surface-foreground:    var(--color-foreground);
+  --color-surface-secondary:     var(--palette-gray-850);
+  --color-surface-secondary-foreground: var(--color-foreground);
+  --color-surface-tertiary:      var(--palette-gray-800);
+  --color-surface-tertiary-foreground:  var(--color-foreground);
+  --color-overlay:               var(--palette-gray-900);
+  --color-overlay-foreground:    var(--color-foreground);
+  --color-muted:                 var(--palette-gray-400);
+  --color-scrollbar:             var(--palette-gray-400);
+  --color-border:                oklch(28% 0.006 286.033);
+  --color-separator:             oklch(25% 0.006 286.033);
+  --color-backdrop:              rgba(0, 0, 0, 0.6);
+
+  --color-default:               oklch(27.4% 0.006 286.033);
+  --color-default-foreground:    var(--palette-snow);
+  --color-default-hover:         color-mix(in oklab, var(--color-default) 96%, var(--color-default-foreground) 4%);
+
+  /* Status colors tweak slightly for dark legibility */
+  --color-warning:               var(--palette-amber-400);
+  --color-warning-foreground:    var(--palette-gray-900);
+  --color-danger:                var(--palette-red-600);
+  --color-danger-foreground:     var(--palette-snow);
+
+  --color-field:                 var(--palette-gray-900);
+  --color-field-foreground:      var(--color-foreground);
+
+  --color-segment:               var(--palette-gray-600);
+  --color-segment-foreground:    var(--color-foreground);
+
+  --shadow-surface:  0 0 0 0 transparent inset;
+  --shadow-overlay:  0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  --shadow-field:    0 0 0 0 transparent inset;
 }
+
+/* -----------------------------------------------------------------------------
+ * HIGH-CONTRAST mode (a11y) — opt-in via [data-contrast="high"]
+ * Strengthens status / accent for WCAG AAA compliance.
+ * Orthogonal to brand + theme. Applies on top of whatever is already set.
+ * -----------------------------------------------------------------------------
+ */
+[data-contrast="high"] {
+  --color-accent:                var(--palette-blue-600);
+  --color-accent-foreground:     var(--palette-white);
+  --color-success:               var(--palette-green-600);
+  --color-success-foreground:    var(--palette-white);
+  --color-warning-foreground:    var(--palette-black);
+  --color-danger:                var(--palette-red-600);
+  --color-danger-foreground:     var(--palette-white);
+  --color-border:                var(--palette-gray-500);
+  --color-separator:             var(--palette-gray-400);
+  --color-muted:                 var(--palette-gray-700);
+}
+
+[data-contrast="high"][data-theme="dark"],
+[data-contrast="high"].dark {
+  --color-accent:                var(--palette-blue-400);
+  --color-success:               var(--palette-green-400);
+  --color-warning:               var(--palette-amber-400);
+  --color-danger:                var(--palette-red-400);
+  --color-muted:                 var(--palette-gray-300);
+  --color-border:                var(--palette-gray-400);
+  --color-separator:             var(--palette-gray-500);
+}
+
+/* -----------------------------------------------------------------------------
+ * BRAND overrides — add a new [data-brand="..."] block to ship a new brand.
+ * A brand override only needs to redefine the semantic color map; it
+ * inherits radius, spacing, shadows, motion from the default.
+ *
+ * Example template (copy + rename + edit):
+ *
+ *   [data-brand="example"] {
+ *     --color-accent:           var(--palette-green-500);
+ *     --color-accent-foreground: var(--palette-snow);
+ *     --color-accent-hover:     var(--palette-green-600);
+ *     --color-accent-soft:      color-mix(in oklab, var(--color-accent) 15%, transparent);
+ *     --color-accent-soft-foreground: var(--color-accent);
+ *     --color-focus:            var(--color-accent);
+ *   }
+ *
+ * Dark / high-contrast combinations chain naturally:
+ *   <html data-brand="example" data-theme="dark" data-contrast="high">
+ * -----------------------------------------------------------------------------
+ */

@@ -4,6 +4,16 @@
 
 All values live in `assets/tokens.css`. This file explains **when** to reach for which.
 
+> ## Layer note
+>
+> Everything documented here is **L2 semantic** tokens — the API surface
+> components consume. Behind each `--radius-lg` or `--space-base` sits an
+> L1 primitive (e.g. `--palette-radius-base: 0.5rem`). **Never reference
+> the L1 layer from a component.** If you're tempted to use
+> `--palette-radius-base` directly, use `--radius-lg` instead. The
+> primitive layer exists so we can retune the base unit (for a density
+> change or brand variant) without editing a single component.
+
 ---
 
 ## Radius

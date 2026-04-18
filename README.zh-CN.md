@@ -88,6 +88,49 @@ index.html          文档站入口
 
 ---
 
+## Token 架构：两层分层，三轴正交
+
+**两层分层。** 每一个 token 恰好属于其中一层：
+
+```
+L1  --palette-*    物理值（--palette-blue-500、--palette-gray-100...）
+                   只有 L2 semantic 层能消费它。组件永远不要直接引用。
+
+L2  --color-*      语义意义（--color-accent、--color-foreground...）
+    --radius-*     （还有 --space-*、--shadow-*、--ease-*）
+                   组件、AI、所有下游消费者都只读这层。
+```
+
+**三个正交的 theming 轴**，写在 `<html>` 上：
+
+```
+data-brand="zi"              data-theme="light"          data-contrast="high"
+（默认，或自定义品牌）         （或 "dark"）                （选择性开启 WCAG AAA）
+
+<html data-brand="zi" data-theme="dark" data-contrast="high">
+```
+
+三轴自由组合。Dark mode 和高对比度适用于任何品牌；加一个新品牌只需要
+重定义语义颜色，其它全部继承。
+
+**加一个新品牌** = 在 `assets/tokens.css` 末尾追加一个块：
+
+```css
+[data-brand="yourbrand"] {
+  --color-accent:       var(--palette-green-500);
+  --color-accent-hover: var(--palette-green-600);
+  /* ...其它语义覆盖 */
+}
+```
+
+这正是 GitHub Primer、Adobe Spectrum、Salesforce SLDS 多年来在用的
+架构——现在打包成一个 ~400 行 CSS 文件，一下午就能 fork 改造。
+
+0.1.0 → 0.2.0 的迁移说明见 [`CHANGELOG.md`](./CHANGELOG.md)——剧透：
+**零代码改动**，24 个 legacy alias 全部保留。
+
+---
+
 ## 仓库的两个身份：Skill vs 文档站
 
 这个仓库**明确切成两半、零重叠**，两半都指向同一份真相源：
@@ -142,6 +185,7 @@ zi-ui-skill/
 ├── SKILL.md                    ← skill spec：激活、硬规则、场景映射
 ├── README.md                   ← 英文版
 ├── README.zh-CN.md             ← 本文件
+├── CHANGELOG.md                ← 版本历史（semver）、迁移指南
 │
 ├── assets/                     ← 权威真相源（skill 使用）
 │   ├── tokens.css              ←   DNA — 所有设计决策

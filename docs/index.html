@@ -15,35 +15,35 @@
 <style>
   .index-hero {
     padding: 48px 0 64px;
-    border-bottom: 1px solid var(--separator);
+    border-bottom: 1px solid var(--color-separator);
     margin-bottom: 56px;
     display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: end;
   }
   .index-hero .eyebrow {
-    font-size: 11px; font-weight: 500; color: var(--muted);
+    font-size: 11px; font-weight: 500; color: var(--color-muted);
     text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 20px;
     display: inline-flex; align-items: center; gap: 10px;
   }
   .index-hero .eyebrow .pulse {
     width: 6px; height: 6px; border-radius: 999px;
-    background: var(--success); box-shadow: 0 0 0 3px color-mix(in oklab, var(--success) 18%, transparent);
+    background: var(--color-success); box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-success) 18%, transparent);
   }
   .index-hero h1 {
     font-size: 56px; font-weight: 500; letter-spacing: -0.035em; line-height: 1.02;
     margin: 0 0 20px;
   }
-  .index-hero h1 em { font-style: normal; color: var(--muted); }
+  .index-hero h1 em { font-style: normal; color: var(--color-muted); }
   .index-hero p {
-    font-size: 16px; line-height: 1.55; color: var(--muted);
+    font-size: 16px; line-height: 1.55; color: var(--color-muted);
     max-width: 540px; margin: 0;
   }
-  .index-hero p strong { color: var(--foreground); font-weight: 500; }
+  .index-hero p strong { color: var(--color-foreground); font-weight: 500; }
 
   /* --- Introduction section --- */
   .intro {
-    border: 1px solid var(--separator);
+    border: 1px solid var(--color-separator);
     border-radius: var(--radius-3xl, 24px);
-    background: var(--surface);
+    background: var(--color-surface);
     padding: 40px 48px;
     margin-bottom: 56px;
     display: flex; flex-direction: column; gap: 28px;
@@ -53,24 +53,24 @@
     gap: 16px; flex-wrap: wrap;
   }
   .intro-head .eyebrow {
-    font-size: 11px; font-weight: 500; color: var(--muted);
+    font-size: 11px; font-weight: 500; color: var(--color-muted);
     text-transform: uppercase; letter-spacing: 0.14em;
     display: inline-flex; align-items: center; gap: 10px;
   }
-  .intro-head .eyebrow i { font-size: 14px; color: var(--accent); }
+  .intro-head .eyebrow i { font-size: 14px; color: var(--color-accent); }
   .lang-toggle {
     display: inline-flex; gap: 2px; padding: 3px;
-    background: var(--surface-secondary); border-radius: 999px;
-    border: 1px solid var(--separator);
+    background: var(--color-surface-secondary); border-radius: 999px;
+    border: 1px solid var(--color-separator);
   }
   .lang-toggle button {
     font-family: inherit; font-size: 12px; font-weight: 500;
     padding: 5px 14px; border-radius: 999px; border: 0;
-    background: transparent; color: var(--muted); cursor: pointer;
+    background: transparent; color: var(--color-muted); cursor: pointer;
     transition: all 250ms cubic-bezier(.2,.7,.3,1);
   }
   .lang-toggle button.active {
-    background: var(--background); color: var(--foreground);
+    background: var(--color-background); color: var(--color-foreground);
     box-shadow: var(--shadow-surface);
   }
   .intro h2 {
@@ -80,40 +80,40 @@
   .intro-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 40px; }
   .intro-body h3 {
     font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
-    margin: 0 0 8px; color: var(--foreground);
+    margin: 0 0 8px; color: var(--color-foreground);
     display: inline-flex; align-items: center; gap: 8px;
   }
-  .intro-body h3 i { color: var(--accent); font-size: 15px; }
+  .intro-body h3 i { color: var(--color-accent); font-size: 15px; }
   .intro-body p {
-    font-size: 13.5px; line-height: 1.6; color: var(--muted); margin: 0 0 10px;
+    font-size: 13.5px; line-height: 1.6; color: var(--color-muted); margin: 0 0 10px;
   }
   .intro-body p:last-child { margin-bottom: 0; }
-  .intro-body strong { color: var(--foreground); font-weight: 500; }
+  .intro-body strong { color: var(--color-foreground); font-weight: 500; }
   .intro-body code {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 12px; padding: 1px 6px;
-    background: var(--surface-secondary); border-radius: 4px;
-    color: var(--foreground);
+    background: var(--color-surface-secondary); border-radius: 4px;
+    color: var(--color-foreground);
   }
   .intro-reasons {
     grid-column: 1 / -1;
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
-    padding-top: 8px; border-top: 1px dashed var(--separator);
+    padding-top: 8px; border-top: 1px dashed var(--color-separator);
   }
   .intro-reason {
-    padding: 14px; border: 1px solid var(--separator);
-    border-radius: 12px; background: var(--background);
+    padding: 14px; border: 1px solid var(--color-separator);
+    border-radius: 12px; background: var(--color-background);
   }
   .intro-reason .num {
     font-family: "JetBrains Mono", monospace; font-size: 11px;
-    color: var(--accent); margin-bottom: 6px;
+    color: var(--color-accent); margin-bottom: 6px;
   }
   .intro-reason .t {
-    font-size: 12.5px; font-weight: 500; color: var(--foreground);
+    font-size: 12.5px; font-weight: 500; color: var(--color-foreground);
     margin-bottom: 4px;
   }
   .intro-reason .d {
-    font-size: 11.5px; line-height: 1.45; color: var(--muted);
+    font-size: 11.5px; line-height: 1.45; color: var(--color-muted);
   }
   .intro [data-lang-zh] { display: none; }
   .intro[data-lang="zh"] [data-lang-en] { display: none; }
@@ -134,23 +134,23 @@
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
   }
   .stat {
-    padding: 20px; border: 1px solid var(--separator); border-radius: 20px;
-    background: var(--surface); display: flex; flex-direction: column; gap: 4px;
+    padding: 20px; border: 1px solid var(--color-separator); border-radius: 20px;
+    background: var(--color-surface); display: flex; flex-direction: column; gap: 4px;
   }
-  .stat .k { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat .k { font-size: 11px; font-weight: 500; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; }
   .stat .v { font-size: 32px; font-weight: 500; letter-spacing: -0.02em; }
-  .stat .d { font-size: 12px; color: var(--muted); }
+  .stat .d { font-size: 12px; color: var(--color-muted); }
 
   .section-head {
     display: flex; align-items: baseline; justify-content: space-between;
     padding: 0 0 20px;
-    border-bottom: 1px solid var(--separator);
+    border-bottom: 1px solid var(--color-separator);
     margin: 56px 0 24px;
   }
   .section-head h2 {
     font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin: 0;
   }
-  .section-head .meta { font-size: 12px; color: var(--muted); font-family: "JetBrains Mono", monospace; }
+  .section-head .meta { font-size: 12px; color: var(--color-muted); font-family: "JetBrains Mono", monospace; }
 
   .card-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
@@ -159,27 +159,27 @@
 
   a.item {
     display: flex; flex-direction: column; gap: 16px;
-    padding: 24px; border: 1px solid var(--separator); border-radius: 24px;
-    background: var(--surface); text-decoration: none; color: inherit;
+    padding: 24px; border: 1px solid var(--color-separator); border-radius: 24px;
+    background: var(--color-surface); text-decoration: none; color: inherit;
     transition: border-color 180ms var(--ease-smooth), transform 180ms var(--ease-smooth), box-shadow 180ms var(--ease-smooth);
     position: relative; overflow: hidden;
   }
   a.item:hover {
-    border-color: color-mix(in oklab, var(--foreground) 18%, transparent);
+    border-color: color-mix(in oklab, var(--color-foreground) 18%, transparent);
     transform: translateY(-2px);
     box-shadow: var(--shadow-surface);
   }
   a.item .icn {
     width: 36px; height: 36px; border-radius: 10px;
-    background: color-mix(in oklab, var(--foreground) 5%, transparent);
-    display: grid; place-items: center; font-size: 18px; color: var(--foreground);
+    background: color-mix(in oklab, var(--color-foreground) 5%, transparent);
+    display: grid; place-items: center; font-size: 18px; color: var(--color-foreground);
   }
   a.item .ttl { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
-  a.item .dsc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  a.item .dsc { font-size: 12.5px; color: var(--color-muted); line-height: 1.5; }
   a.item .foot {
     display: flex; align-items: center; justify-content: space-between;
     margin-top: auto; padding-top: 8px;
-    font-size: 11px; color: var(--muted); font-family: "JetBrains Mono", monospace;
+    font-size: 11px; color: var(--color-muted); font-family: "JetBrains Mono", monospace;
   }
   a.item .foot i { font-size: 14px; transition: transform 180ms var(--ease-smooth); }
   a.item:hover .foot i { transform: translateX(3px); }
@@ -187,15 +187,15 @@
   .bigcard {
     grid-column: span 3;
     padding: 32px;
-    border: 1px solid var(--separator);
+    border: 1px solid var(--color-separator);
     border-radius: 28px;
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-secondary) 100%);
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-secondary) 100%);
     display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
   }
   .bigcard h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.015em; margin: 0 0 8px; }
-  .bigcard p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0 0 16px; }
+  .bigcard p { font-size: 13.5px; color: var(--color-muted); line-height: 1.55; margin: 0 0 16px; }
   .bigcard .code {
-    background: color-mix(in oklab, var(--foreground) 5%, transparent);
+    background: color-mix(in oklab, var(--color-foreground) 5%, transparent);
     padding: 4px 8px; border-radius: 6px; font-family: "JetBrains Mono", monospace;
     font-size: 12px;
   }
@@ -221,7 +221,7 @@
         <div>
           <div class="eyebrow"><span class="pulse"></span>Zi UI v3 · April 2026</div>
           <h1>The foundations and surface<br><em>behind every Zi UI product.</em></h1>
-          <p>A token-first design system authored in OKLCH. <strong>6 foundations</strong> and <strong>18 components</strong>, rebuilt from the <span class="mono" style="color:var(--foreground)">@ziui/v3</span> upstream release. Every page here pulls from the same <span class="mono" style="color:var(--foreground)">tokens.css</span> you'd ship.</p>
+          <p>A token-first design system authored in OKLCH. <strong>6 foundations</strong> and <strong>18 components</strong>, rebuilt from the <span class="mono" style="color:var(--color-foreground)">@ziui/v3</span> upstream release. Every page here pulls from the same <span class="mono" style="color:var(--color-foreground)">tokens.css</span> you'd ship.</p>
         </div>
         <div class="stat-grid">
           <div class="stat"><span class="k">Foundations</span><span class="v">6</span><span class="d">Color · Type · Radius · Spacing · Elevation · Motion</span></div>
@@ -258,10 +258,10 @@
             <h3 data-lang-zh><i class="ph-duotone ph-tree-structure"></i>一句话讲架构</h3>
             <p data-lang-en><strong>One truth source, many downstream consumers.</strong></p>
             <p data-lang-zh><strong>一份真相源，多个下游消费者。</strong></p>
-            <p data-lang-en>The DNA is <code>assets/tokens.css</code> — every color, radius, spacing, and shadow decision lives there. <code>components.css</code> projects those tokens into semantic classes (<code>.button</code>, <code>.card</code>). Everything else in this repo is a consumer of that truth: the SKILL for AI agents, this docs site for humans, and any future React/Vue/email-template layer you'd add downstream.</p>
-            <p data-lang-zh>DNA 是 <code>assets/tokens.css</code>——所有颜色、圆角、间距、阴影决策都在那里。<code>components.css</code> 把这些 token 投影成语义类（<code>.button</code>、<code>.card</code>）。仓库里其他一切都是这份真相源的下游消费者：给 AI 的 SKILL、给人的这个文档站，以及未来可以加的 React / Vue / 邮件模板层。</p>
-            <p data-lang-en>Change <code>--accent</code> once, and every page, every component, every downstream consumer follows. That's not a convenience — it's the architecture itself.</p>
-            <p data-lang-zh>改一次 <code>--accent</code>，每个页面、每个组件、每个下游消费者都跟着变。这不是"便利"——<strong>这就是架构本身</strong>。</p>
+            <p data-lang-en>The DNA is <code>assets/tokens.css</code>, organized into two layers: <strong>primitives</strong> (<code>--palette-blue-500</code>, physical values) and <strong>semantics</strong> (<code>--color-accent</code>, meaning). Components only consume the semantic layer — never the palette. <code>components.css</code> projects semantic tokens into classes. Everything else is a downstream consumer.</p>
+            <p data-lang-zh>DNA 是 <code>assets/tokens.css</code>，分为两层：<strong>primitive</strong>（<code>--palette-blue-500</code>，物理值）和 <strong>semantic</strong>（<code>--color-accent</code>，语义意义）。组件只消费 semantic 层——永远不直接引用 palette。<code>components.css</code> 把 semantic token 投影成类。仓库里其他一切都是下游消费者。</p>
+            <p data-lang-en>Three orthogonal axes (<code>data-brand</code>, <code>data-theme</code>, <code>data-contrast</code>) compose freely on <code>&lt;html&gt;</code>. Swap the semantic map to rebrand without touching a component; enable high-contrast for WCAG AAA; stack dark mode on top. That's not a convenience — it's the architecture itself.</p>
+            <p data-lang-zh>三个正交轴（<code>data-brand</code>、<code>data-theme</code>、<code>data-contrast</code>）在 <code>&lt;html&gt;</code> 上自由组合。改 semantic 层换品牌而不动组件；开高对比度过 WCAG AAA；叠上 dark mode。这不是"便利"——<strong>这就是架构本身</strong>。</p>
           </div>
 
           <div class="intro-reasons">
@@ -469,8 +469,8 @@
         <a class="item" href="components/card.html">
           <div class="icn"><i class="ph-duotone ph-square-half"></i></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-            <div style="background:var(--surface);border:1px solid var(--separator);border-radius:10px;height:40px"></div>
-            <div style="background:var(--surface-secondary);border:1px solid var(--separator);border-radius:10px;height:40px"></div>
+            <div style="background:var(--color-surface);border:1px solid var(--color-separator);border-radius:10px;height:40px"></div>
+            <div style="background:var(--color-surface-secondary);border:1px solid var(--color-separator);border-radius:10px;height:40px"></div>
           </div>
           <div class="ttl">Card</div>
           <div class="dsc">3 surface types on 24px radius + surface shadow.</div>
@@ -522,10 +522,10 @@
 
         <a class="item" href="components/table.html">
           <div class="icn"><i class="ph-duotone ph-table"></i></div>
-          <div style="border:1px solid var(--separator);border-radius:10px;overflow:hidden;font-size:11px">
-            <div style="background:color-mix(in oklab,var(--foreground) 4%,transparent);padding:6px 10px;color:var(--muted);font-weight:500;display:flex;justify-content:space-between"><span>Project</span><span>Uptime</span></div>
-            <div style="padding:6px 10px;border-top:1px solid var(--separator);display:flex;justify-content:space-between"><span>Pulse</span><span class="mono">99.98%</span></div>
-            <div style="padding:6px 10px;border-top:1px solid var(--separator);display:flex;justify-content:space-between"><span>Onboard</span><span class="mono">98.12%</span></div>
+          <div style="border:1px solid var(--color-separator);border-radius:10px;overflow:hidden;font-size:11px">
+            <div style="background:color-mix(in oklab,var(--color-foreground) 4%,transparent);padding:6px 10px;color:var(--color-muted);font-weight:500;display:flex;justify-content:space-between"><span>Project</span><span>Uptime</span></div>
+            <div style="padding:6px 10px;border-top:1px solid var(--color-separator);display:flex;justify-content:space-between"><span>Pulse</span><span class="mono">99.98%</span></div>
+            <div style="padding:6px 10px;border-top:1px solid var(--color-separator);display:flex;justify-content:space-between"><span>Onboard</span><span class="mono">98.12%</span></div>
           </div>
           <div class="ttl">Table</div>
           <div class="dsc">Flush header band, separator rows, tokenized hover.</div>
@@ -534,9 +534,9 @@
 
         <a class="item" href="components/modal.html">
           <div class="icn"><i class="ph-duotone ph-browser"></i></div>
-          <div style="border:1px solid var(--separator);border-radius:12px;background:var(--overlay);padding:12px;box-shadow:var(--shadow-overlay)">
+          <div style="border:1px solid var(--color-separator);border-radius:12px;background:var(--overlay);padding:12px;box-shadow:var(--shadow-overlay)">
             <div style="font-size:12px;font-weight: 500;margin-bottom:4px">Create project</div>
-            <div style="font-size:11px;color:var(--muted)">Overlay surface, 24px radius.</div>
+            <div style="font-size:11px;color:var(--color-muted)">Overlay surface, 24px radius.</div>
           </div>
           <div class="ttl">Modal</div>
           <div class="dsc">Full overlay composition. Fields, switches, action bar.</div>

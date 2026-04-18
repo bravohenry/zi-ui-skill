@@ -80,7 +80,7 @@ For each scenario: which primitives to compose, which to avoid, and a ready-to-a
     </thead>
     <tbody>
       <tr>
-        <td><strong>Pulse Studio</strong><div style="color: var(--muted); font-size: 12px;">pulse.zi.ui</div></td>
+        <td><strong>Pulse Studio</strong><div style="color: var(--color-muted); font-size: 12px;">pulse.zi.ui</div></td>
         <td><span class="chip chip--soft chip--success"><span class="dot"></span>Live</span></td>
         <td>Ana Kowalski</td>
         <td>284,921</td>
@@ -168,7 +168,7 @@ For each scenario: which primitives to compose, which to avoid, and a ready-to-a
     </div>
     <button class="button button--primary" style="width: 100%;">Sign in</button>
     <div class="card__description" style="text-align: center;">
-      Don't have an account? <a href="#" style="color: var(--foreground);">Create one</a>
+      Don't have an account? <a href="#" style="color: var(--color-foreground);">Create one</a>
     </div>
   </div>
 </main>

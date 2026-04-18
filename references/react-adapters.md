@@ -365,8 +365,8 @@ import "./globals.css";          // imports tokens.css + components.css
 
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-foreground);
   font: 400 14px/1.5 "Geist", sans-serif;
 }
 ```
